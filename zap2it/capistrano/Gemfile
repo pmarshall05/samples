@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gem 'capistrano','~>2.15.5'
+gem 'capistrano-multistage'
+gem 'capistrano-multiconfig','~>0.0.4'
+gem 'aws-sdk','~>1.15.0'

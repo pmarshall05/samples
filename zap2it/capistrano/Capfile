@@ -1,0 +1,13 @@
+require 'bundler/setup'
+
+load 'deploy'
+load 'config/deploy'
+load 'config/deploy/AwsApi'
+
+require 'capistrano'
+require 'capistrano/multiconfig'
+require 'aws-sdk'
+
+
+# Optional: Use bundler for managing remote gems
+#require 'bundler/capistrano'

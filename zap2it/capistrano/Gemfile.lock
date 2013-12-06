@@ -1,0 +1,39 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-sdk (1.15.0)
+      json (~> 1.4)
+      nokogiri (< 1.6.0)
+      uuidtools (~> 2.1)
+    capistrano (2.15.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano-multiconfig (0.0.4)
+      capistrano (>= 2.5.5)
+    capistrano-multistage (0.0.4)
+      capistrano (>= 2.12.0)
+      rake
+    highline (1.6.20)
+    json (1.8.1)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
+    nokogiri (1.5.10)
+    rake (10.1.0)
+    uuidtools (2.1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aws-sdk (~> 1.15.0)
+  capistrano (~> 2.15.5)
+  capistrano-multiconfig (~> 0.0.4)
+  capistrano-multistage
