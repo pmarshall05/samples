@@ -1,0 +1,8 @@
+{% embed "@pages/content-types/service/service-teaser.twig" with {
+  service_teaser__additional_classes: ['grid__item'],
+  service_teaser_heading: label,
+  service_teaser_link_url: url,
+  service_teaser_image_src: file_url(content.field_service_hero[0]['#paragraph'].field_image.entity.uri.value),
+  service_teaser_image_alt: content.field_service_hero[0]['#paragraph'].field_image.entity.alt,
+} %}
+{% endembed %}

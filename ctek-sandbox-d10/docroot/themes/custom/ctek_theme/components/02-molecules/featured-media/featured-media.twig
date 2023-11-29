@@ -1,0 +1,88 @@
+{% set featured_media__base_class = featured_media__base_class|default('featured-media') %}
+{% set featured_media__attributes = featured_media__attributes|default([]) %}
+
+{% set featured_media__attributes = featured_media__attributes|merge({
+    'class': bem(featured_media__base_class, featured_media__modifiers, featured_media__blockname, featured_media__additional_classes),
+  }) %}
+
+<section {{ add_attributes(featured_media__attributes) }}>
+	{% if featured_media_position == 'right' %}
+		<div {{ bem ('content',[], featured_media__base_class) }}>
+			{% if featured_media_title %}
+			  	{% include "@atoms/text/headings/_heading.twig" with {
+			          heading_level: 2,
+			          heading: featured_media_title,
+			    } %}
+			{% endif %}
+			{% if featured_media_description %}
+				{% include "@atoms/text/text/01-paragraph.twig" with {
+		          paragraph_content: featured_media_description,
+		        } %}
+			{% endif %}
+		</div>
+		<div {{ bem ('media',[], featured_media__base_class) }}>
+			{% if featured_media_image_src %} 
+				<div {{ bem ('image',[], featured_media__base_class) }}>
+			      {% include "@atoms/images/image/responsive-image.twig" with {
+			        output_image_tag: true,
+			        image_src: featured_media_image_src,
+			        image_alt: featured_media_image_alt,
+			      } %}
+			    </div>
+			{% elseif featured_media_video_type == 'embed' %}
+				<div {{ bem ('video',[], featured_media__base_class) }}>
+			      {% include "@atoms/videos/video.twig" with {
+			        video__type: featured_media_video_type,
+			        video_content: featured_media_video_content,
+			      } %}
+			    </div>
+			{% elseif featured_media_video_type == 'html5' %}
+				<div {{ bem ('video',[], featured_media__base_class) }}>
+			      {% include "@atoms/videos/video.twig" with {
+			        video__type: featured_media_video_type,
+			        video__urls: featured_media_video_urls,
+			      } %}
+			    </div>
+			{% endif %}
+		</div>
+	{% else %}
+		<div {{ bem ('media',[], featured_media__base_class) }}>
+			{% if featured_media_image_src %} 
+				<div {{ bem ('image',[], featured_media__base_class) }}>
+			      {% include "@atoms/images/image/responsive-image.twig" with {
+			        output_image_tag: true,
+			        image_src: featured_media_image_src,
+			        image_alt: featured_media_image_alt,
+			      } %}
+			    </div>
+			{% elseif featured_media_video_type == 'embed' %}
+				<div {{ bem ('video',[], featured_media__base_class) }}>
+			      {% include "@atoms/videos/video.twig" with {
+			        video__type: featured_media_video_type,
+			        video_content: featured_media_video_content,
+			      } %}
+			    </div>
+			{% elseif featured_media_video_type == 'html5' %}
+				<div {{ bem ('video',[], featured_media__base_class) }}>
+			      {% include "@atoms/videos/video.twig" with {
+			        video__type: featured_media_video_type,
+			        video__urls: featured_media_video_urls,
+			      } %}
+			    </div>
+			{% endif %}
+		</div>
+		<div {{ bem ('content',[], featured_media__base_class) }}>
+			{% if featured_media_title %}
+			  	{% include "@atoms/text/headings/_heading.twig" with {
+			          heading_level: 2,
+			          heading: featured_media_title,
+			    } %}
+			{% endif %}
+			{% if featured_media_description %}
+				{% include "@atoms/text/text/01-paragraph.twig" with {
+		          paragraph_content: featured_media_description,
+		        } %}
+			{% endif %}
+		</div>
+ 	{% endif %}
+</section>

@@ -1,0 +1,38 @@
+{% set user_types = [] %}
+
+{% if content.field_user_types %}
+	{% for item in content.field_user_types['#items'] %}
+		{% set links = [] %}
+		{% for link in item.entity.field_links %}
+			{% set type = '' %}
+			{% if link.url.external %}
+				{% set type = 'external' %}
+				{% set itemUrl = link.uri %}
+			{% else %}
+				{% set type = 'internal' %}
+				{% set itemUrl = link.uri|replace({'internal:':''}) %}
+			{% endif %}
+			
+			{% set links = links|merge([{
+				'name': link.title,
+				'type': type,
+				'url': itemUrl,
+			}]) %}
+
+		{% endfor %}
+
+		{% set user_types = user_types|merge([{
+			'name': item.entity.field_title['#items'][0].value,
+			'links': links,
+			}]) 
+		%}
+	{% endfor %}
+{% endif %}
+
+{% block user_type_selector %}
+	{% include "@molecules/selector/user-type/user-type.twig" with {
+    usertype__selector_content: content.field_title['#items'][0].value,
+    usertype__selector_description: content.field_description['#items'][0].value,
+    usertype__selector_types: user_types,
+  } %}
+{% endblock user_type_selector %}

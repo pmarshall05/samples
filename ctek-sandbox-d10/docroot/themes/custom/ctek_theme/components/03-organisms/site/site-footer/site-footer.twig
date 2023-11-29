@@ -1,0 +1,44 @@
+{% set footer__base_class = 'footer' %}
+{% set year = ('now' | date('Y'))  %}
+
+<footer {{ bem(footer__base_class) }}>
+  <div {{ bem('inner', [], footer__base_class) }}>
+    <div {{ bem('primary', [], footer__base_class) }}>
+      <div {{ bem('logo-social', [], footer__base_class) }}>
+        <div {{ bem('logo', [], footer__base_class) }}>
+          {% block footer__logo %}
+            {% include "@organisms/site/site-footer/_site-footer-branding.twig" %}
+          {% endblock %}
+        </div>
+        <div {{ bem('social', [], footer__base_class) }}>
+          {% block footer__social %}
+            {% include "@molecules/menus/social-menu/social-menu.twig" %}
+          {% endblock %}
+        </div>
+      </div>
+      
+      <div {{ bem('menu', [], footer__base_class) }}>
+        {% block footer__menu %}
+          {% include "@molecules/menus/footer/footer.twig" %}
+        {% endblock %}
+      </div>
+
+      <div {{ bem('bottom', [], footer__base_class) }}>
+        {% include "@atoms/text/text/06-hr.twig" %}
+
+        {% block footer__contact %}
+            {% include "@molecules/menus/footer/_footer_contact.twig" %}
+        {% endblock %}
+
+        {% block footer__legal %}
+            {% include "@molecules/menus/footer/_footer_legal.twig" %}
+        {% endblock %}
+
+        <div {{ bem('bottom-copyright', [], footer__base_class) }}>
+          <p class="paragraph--small">&copy; {{ year }} Centretek</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</footer>

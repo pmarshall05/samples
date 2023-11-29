@@ -1,0 +1,28 @@
+{% set hero__base_class = hero__base_class|default('hero-homepage') %}
+{% set hero__attributes = hero__attributes|default([]) %}
+
+{% set hero__attributes = hero__attributes|merge({
+    'class': bem(hero__base_class, hero__modifiers, hero__blockname, hero__additional_classes),
+  }) %}
+
+<section {{ add_attributes(hero__attributes) }}>
+    {% include "@atoms/images/image/responsive-image.twig" with {
+    output_image_tag: true,
+    image_src: hero_image_src,
+    image_alt: hero_image_alt,
+    image_title: hero_image_title,
+    responsive_image_blockname: 'homepage-hero',
+    } %}
+  <div {{ bem('content', [], hero__base_class) }}>
+    {% include "@atoms/text/headings/_heading.twig" with {
+      heading_level: 1,
+      heading: hero_title,
+    } %}
+
+    <div class="subhead">
+      {% include "@atoms/text/text/08-subhead.twig" with {
+        subhead_content: hero_intro_text,
+      } %}
+    </div>
+  </div>
+</section>

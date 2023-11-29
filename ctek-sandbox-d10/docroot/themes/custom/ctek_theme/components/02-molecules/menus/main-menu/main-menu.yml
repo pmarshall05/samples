@@ -1,0 +1,113 @@
+menu_items:
+- title: Find a Doctor
+  url: "#"
+  submenu:
+    description: Brief intro lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    main_link:
+      title: View All Doctors
+      url: "#"
+    featured_links:
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    featured_item:
+      image_src: "/static/media/images/doctors.jpeg"
+      title: Primary Care Doctors
+      url: "#"
+- title: Services
+  url: "#"
+  submenu:
+    description: Brief intro lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    main_link:
+      title: View All Services
+      url: "#"
+    featured_links:
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    featured_item:
+      image_src: "/static/media/images/doctors.jpeg"
+      title: Cancer Care
+      url: "#"
+- title: Locations
+  url: "#"
+  submenu:
+    description: Brief intro lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    main_link:
+      title: View All Locations
+      url: "#"
+    featured_links:
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    featured_item:
+      image_src: "/static/media/images/hospital-1.jpg"
+      title: Hospital 1
+      url: "#"
+- title: Patients & Visitors
+  url: "#"
+  submenu:
+    description: Brief intro lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    main_link:
+      title: View All Resources
+      url: "#"
+    featured_links:
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    - title: Inline Link
+      url: "#"
+    featured_item:
+      image_src: "/static/media/images/bill-pay.jpg"
+      title: Pay Your Bill
+      url: "#"

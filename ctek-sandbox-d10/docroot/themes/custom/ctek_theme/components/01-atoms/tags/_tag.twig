@@ -1,0 +1,36 @@
+{#
+/**
+ * Available variables:
+ * - tag__content - the content of the tag (typically text)
+ *
+ * Available blocks:
+ * - tag__content - used to replace the content of the tag with something other than text
+ *   for example: to insert an icon
+ */
+#}
+
+{% set tag__base_class = tag__base_class|default('tag') %}
+{% set tag__attributes = tag__attributes|default([]) %}
+
+{% set tag__attributes = tag__attributes|merge({
+  'class': bem(tag__base_class, tag__modifiers, tag__blockname, tag__additional_classes),
+}) %}
+
+<div {{ add_attributes(tag__attributes) }}>
+  {% if (tag_url is not empty) %}
+    <a href="{{ tag_url }}" target="_blank">
+  {% endif %}
+  {% if (tag_icon is not empty) and (tag_icon_position == 'left') %}
+    <i class="fa-{{ tag_icon_style }} fa-{{ tag_icon }}"></i>
+  {% endif %}
+  {% block tag__content %}
+    {{ tag__content }}
+  {% endblock %}
+  {% if (tag_icon is not empty) and (tag_icon_position == 'right') %}
+    <i class="fa-{{ tag_icon_style }} fa-{{ tag_icon }}"></i>
+  {% endif %}
+  {%if (tag_url is not empty) %}
+    </a>
+  {% endif %}
+</div>
+

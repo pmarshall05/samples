@@ -1,0 +1,116 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+$utility-icon-size: 16px;
+
+.utility-menu {
+  @include list-reset;
+  background-color: clr(primary);
+  overflow: hidden;
+  background: clr(primary); 
+  align-items: flex-start; 
+  display: flex;
+  gap: 16px;
+  padding: 12px 120px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 32px;
+    flex: 1 0 0;
+    align-self: stretch;
+  }
+  
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+
+    i {
+      color: clr(text-inverse);
+    }
+  }
+
+  &__location-result {
+    font-weight: 325;
+    font-variation-settings: 'wght' 325;
+    font-size: 1rem;
+    color: clr(text-inverse);
+  }
+
+  &__location-result-icon {
+    display: flex;
+    align-items: center;
+
+    i {
+      color: clr(accent);
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__link {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    text-decoration: none;
+    color: clr(text-inverse);
+    gap: 10px;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+
+    i {
+      color: clr(accent);
+    }
+  }
+
+  &__icon {
+    height: $social-icon-size;
+    width: $social-icon-size;
+    margin-right: $space-one-half;
+    fill: currentColor;
+  }
+
+  &__text {
+    font-weight: 325;
+    font-variation-settings: 'wght' 325;
+    font-size: 1rem;
+  }
+
+  &__search {
+    i {
+      color: clr(accent);
+    }
+  }
+}
+
+#current-location-form {
+  display: flex;
+  padding: 24px;
+  flex-direction: row;
+  align-items: flex-end;
+  justtify-content: flex-start;
+  gap: 16px;
+  border: 1px solid clr(extended-accent-1);
+  background: clr(neutral-white);
+  display: none;
+
+  button {
+    width: 20%;
+  }
+}

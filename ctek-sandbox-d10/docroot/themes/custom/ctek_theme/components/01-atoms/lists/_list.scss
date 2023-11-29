@@ -1,0 +1,55 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+ul {
+  @include list-reset;
+
+  list-style-type: disc;
+}
+
+ol {
+  @include list-reset;
+
+  list-style-type: decimal;
+}
+
+li {
+  font-size: 1.125rem; 
+  line-height: 1.8;
+}
+
+
+
+.text-field {
+  
+  li {
+    padding-left: $space;
+  }
+}
+
+.text-long {
+  li {
+    margin-left: 1.125rem;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  ul li::before {
+    content: "\2022";  
+    color: clr(accent);
+    font-weight: bold; 
+    font-size: 1.5rem;
+    display: inline-block;
+    padding-right: 1rem;
+    margin-left: -1rem;
+  }
+}
+
+
+.dl-term {
+  font-weight: bold;
+}

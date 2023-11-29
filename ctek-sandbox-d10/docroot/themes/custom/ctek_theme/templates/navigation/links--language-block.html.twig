@@ -1,0 +1,13 @@
+{% set languageTypes = [] %}
+
+{% if languages %}
+  {% for language in languages %}
+    {% set languageTypes = languageTypes|merge([{'name':language.name,'code':language.id}]) %}
+  {% endfor %}
+{% endif %}
+
+{% include "@molecules/selector/language/language.twig" with {
+  language__selector_content: currentLanguage.name,
+  language__selector_description: languageSelectorDescription,
+  language__selector_types: languageTypes,
+}%}

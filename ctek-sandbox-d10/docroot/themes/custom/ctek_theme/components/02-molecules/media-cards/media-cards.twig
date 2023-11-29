@@ -1,0 +1,43 @@
+{% set media_cards__base_class = media_cards__base_class|default('media-cards') %}
+{% set media_cards__attributes = media_cards__attributes|default([]) %}
+
+{% set media_cards__attributes = media_cards__attributes|merge({
+    'class': bem(media_cards__base_class, media_cards__modifiers, media_cards__blockname, media_cards__additional_classes),
+  }) %}
+
+<section {{ add_attributes(media_cards__attributes) }}>
+	<div {{ bem ('inner',[], media_cards__base_class) }}>
+		<div {{ bem ('content',[], media_cards__base_class) }}>
+			{% if media_cards_eyebrow %}
+				{% include "@atoms/text/text/09-eyebrow.twig" with {
+		          eyebrow_content: media_cards_eyebrow,
+		        } %}
+			{% endif %}
+		  	{% if media_cards_title %}
+			  	{% include "@atoms/text/headings/_heading.twig" with {
+			          heading_level: 2,
+			          heading: media_cards_title,
+			    } %}
+			{% endif %}
+			{% if media_cards_description %}
+				{% include "@atoms/text/text/01-paragraph.twig" with {
+		          paragraph_content: media_cards_description,
+		          paragraph_modifiers: ['large'],
+		        } %}
+			{% endif %}
+		</div>
+		<div {{ bem ('cards',[], media_cards__base_class) }}>
+			{% for item in media_card_items %}
+				{% include "@molecules/card/card.twig" with {
+				    card__extra_classes: ["media-cards__card"],
+				    card__heading: item.title,
+				    card__body: item.body,
+				    card__heading__link: item.url,
+				    card__image__src: item.image_src,
+				    card__image__alt: item.image_alt,
+				    card__image__output_image_tag: true,
+				} %}
+	  		{% endfor %}
+  		</div>
+	</div>
+</section>

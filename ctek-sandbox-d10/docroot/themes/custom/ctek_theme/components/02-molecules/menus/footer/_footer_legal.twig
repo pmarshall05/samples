@@ -1,0 +1,21 @@
+{% set footer__base_class = 'footer' %}
+
+<div {{ bem('bottom-legal', [], footer__base_class) }}>
+    {% for item in items %}
+        {% if (item.url.external) %}
+          	{% include "@atoms/links/link/link.twig" with {
+			    link_url: item.url,
+			    link_content: item.title,
+			    link_type: 'arrow-external',
+			    link_modifiers: ["arrow", "inverse"],
+        	} %}
+        {% else %}
+	        {% include "@atoms/links/link/link.twig" with {
+		        link_url: item.url,
+		        link_content: item.title,
+		        link_type: 'arrow',
+		        link_modifiers: ["arrow","inverse","hide-icon"],
+	        } %}
+        {% endif %}
+    {% endfor %}
+</div>

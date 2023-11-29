@@ -1,0 +1,13 @@
+{%
+  set tags__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% block tags %}
+	{% include "@atoms/tags/tags.twig" with {
+		tags: content.field_tags['#items'],
+	} %}
+{% endblock tags %}

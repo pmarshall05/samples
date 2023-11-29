@@ -1,0 +1,13 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+
+.text-with-media__inner {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: $space-one-half;
+
+  [data-image-position='left'] & {
+    flex-direction: row-reverse;
+  }
+}

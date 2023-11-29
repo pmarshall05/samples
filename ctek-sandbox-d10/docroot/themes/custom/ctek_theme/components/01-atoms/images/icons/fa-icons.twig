@@ -1,0 +1,12 @@
+<div class="icons-fa-demo" id="icons">
+  {% for item in icons %}
+    <div class="icons-fa-demo__item">
+      {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+        icon__name: item.icon_name,
+        icon__style: item.icon_style,
+      } %}
+      <div>{{ item.icon_name }}</div>
+    </div>
+  {% endfor %}
+</div>
+<br>

@@ -1,0 +1,31 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../01-atoms/links/link/link' as *;
+
+.inline-menu {
+  @include list-reset;
+}
+
+.inline-menu__item {
+  margin: 0 1em 0.5em 0;
+
+  @include large {
+    display: inline;
+    margin-bottom: 1em;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.inline-menu__link {
+  @include link;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}

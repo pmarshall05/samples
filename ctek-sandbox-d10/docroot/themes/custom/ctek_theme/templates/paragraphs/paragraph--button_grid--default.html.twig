@@ -1,0 +1,46 @@
+{%
+  set button_grid__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% if (content.field_buttons['#items']) %}
+  {% set buttons = [] %}
+	{% set itemUrl = '' %}
+  
+	{% for item in content.field_buttons['#items'] %}
+		
+		{% set style = 'solid' %}
+		{% if (item.entity.field_icon[0].style == 'far') %}
+			{% set style = 'regular' %}
+		{% endif %}
+
+		{% if item.entity.field_url[0].url.external %}
+			{% set itemUrl = item.entity.field_url[0].uri %}
+		{% else %}
+			{% set itemUrl = item.entity.field_url[0].uri|replace({'internal:':''}) %}
+		{% endif %}
+	   
+	    {% set buttons = buttons|merge([{
+	      'label': item.entity.field_label.value,
+	      'type': item.entity.field_button_type.value,
+	      'url': itemUrl,
+	      'icon': item.entity.field_icon[0].icon_name,
+	      'icon_position': item.entity.field_icon_position.value|lower,
+	      'icon_style': style,
+	      }]) 
+	    %}
+	{% endfor %}
+{% endif %}
+
+
+{% block button_grid %}
+	{% include "@molecules/button-grid/button-grid.twig" with {
+	button_grid_eyebrow: content.field_eyebrow['#items'][0].value,
+	button_grid_title: content.field_title['#items'][0].value,
+	button_grid_description: content.field_description['#items'][0].value,
+	button_grid_items: buttons,
+  } %}
+{% endblock button_grid %}

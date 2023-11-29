@@ -1,0 +1,7 @@
+button__content: 'Lorem Ipsum'
+button_url: '#'
+button_icon: 'download'
+button_icon_position: 'left'
+button_icon_style: 'solid'
+button__modifiers:
+  - 'secondary'

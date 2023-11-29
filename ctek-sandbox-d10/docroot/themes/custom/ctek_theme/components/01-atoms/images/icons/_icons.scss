@@ -1,0 +1,40 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+
+// Storybook styling
+.icons-demo, .icons-fa-demo {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  .icon {
+    height: 100px;
+    padding: $space;
+    width: 100px;
+
+    @media (prefers-color-scheme: default) {
+      fill: clr(accent);
+    }
+  }
+
+  div {
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: center;
+  }
+}
+
+i {
+  font-size: 1.25rem;
+}
+
+.icons-demo__item, .icons-fa-demo__item {
+  margin: $space-one-fourth;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}

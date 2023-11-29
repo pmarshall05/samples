@@ -1,0 +1,17 @@
+{%
+  set single_color_cta__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+ %}
+
+{% block single_color_cta %}
+	{% include "@molecules/single-color-cta/single-color-cta.twig" with {
+	single_color_cta_title: content.field_title['#items'][0].value,
+	single_color_cta_description: content.field_description['#items'][0].value,
+	single_color_cta_button_label: content.field_button['#items'][0].entity.field_label.value,
+	single_color_cta_button_type: content.field_button['#items'][0].entity.field_button_type.value,
+	single_color_cta__modifiers: [content.field_singlecolorcta_background['#items'][0].value],
+  } %}
+{% endblock single_color_cta %}

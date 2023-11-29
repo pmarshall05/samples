@@ -1,0 +1,36 @@
+<div {{ bem('column', [], footer_menu__base_class) }}>
+	{% if (column.url) %}
+	  {% include "@atoms/text/headings/_heading.twig" with {
+	  heading_level: 5,
+	  heading: column.title,
+	  heading_url: column.url,
+	} %}
+	{% else %}
+	  {% include "@atoms/text/headings/_heading.twig" with {
+	  heading_level: 5,
+	  heading: column.title,
+	} %}
+	{% endif %}
+
+    {% if (column.below) %}
+   	<div {{ bem('column-links', [], footer_menu__base_class) }}>
+      {% for link in column.below %}
+        {% if (link.url.external) %}
+          	{% include "@atoms/links/link/link.twig" with {
+			    link_url: link.url,
+			    link_content: link.title,
+			    link_type: 'arrow-external',
+			    link_modifiers: ["arrow", "inverse"],
+        	} %}
+        {% else %}
+	        {% include "@atoms/links/link/link.twig" with {
+		        link_url: link.url,
+		        link_content: link.title,
+		        link_type: 'arrow',
+		        link_modifiers: ["arrow","inverse","hide-icon"],
+	        } %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+</div>

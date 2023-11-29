@@ -1,0 +1,47 @@
+{% set tags__base_class = tags__base_class|default('tags') %}
+{% set tags__attributes = tags__attributes|default([]) %}
+
+{% set tags__attributes = tags__attributes|merge({
+  'class': bem(tags__base_class, tags__modifiers, tags__blockname, tags__additional_classes),
+}) %}
+
+
+<div {{ add_attributes(tags__attributes) }}>
+{% for tag in tags %}
+
+  {% if tag.entity %} {# Powered by Drupal #}
+
+    {% if (tag.entity.field_icon) %}
+      {% set style = 'solid' %}
+      {% if (tag.entity.field_icon[0].style == 'far') %}
+        {% set style = 'regular' %}
+      {% endif %}
+    {% endif %}
+
+    {% if loop.index % 2 == 0 %}
+      {% set tag__modifiers = ['secondary'] %}
+    {% elseif loop.index % 3 == 0 %}
+      {% set tag__modifiers = ['tertiary'] %}
+    {% elseif loop.index % 4 == 0 %}
+      {% set tag__modifiers = ['outline'] %}
+    {% endif %}
+
+    {% include "@atoms/tags/_tag.twig" with {
+      tag__content: tag.entity.field_taxonomy_term.entity.name.value,
+      tag_url: path('entity.taxonomy_term.canonical', {'taxonomy_term': tag.entity.field_taxonomy_term.entity.tid.value}),
+      tag_icon: tag.entity.field_icon[0].icon_name,
+      tag_icon_style: style,
+      tag_icon_position: tag.entity.field_icon_position[0].value|lower,
+    } %}
+  {% else %} {# Powered by Storybook #}
+    {% include "@atoms/tags/_tag.twig" with {
+      tag__content: tag.content,
+      tag__modifiers: tag.modifiers,
+      tag_url: tag.url,
+      tag_icon: tag.icon,
+      tag_icon_style: tag.icon_style,
+      tag_icon_position: tag.icon_position,
+    } %}
+  {% endif %}
+{% endfor %}
+</div>

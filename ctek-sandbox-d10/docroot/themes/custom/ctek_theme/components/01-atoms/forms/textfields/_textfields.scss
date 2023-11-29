@@ -1,0 +1,128 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+
+.form-input {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+
+  .input-label {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .required-indicator {
+      color: clr(error);
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    label {
+      color: clr(neutral-gray-3);
+      font-family: $font-body;
+      font-size: 1.125rem;
+      font-style: normal;
+      line-height: 180%; /* 28.8px */
+      font-weight: 400;
+      font-variation-settings: 'wght' 400;
+    }
+  }
+
+  .input-icon-wrap {
+    border: 1px solid clr(primary);
+    border-radius: 4px;  
+    display: flex;
+    flex-direction: row;
+    background: clr(neutral-white);
+    align-items: center;
+    gap: 12px;
+    align-self: stretch;
+    padding: 0px 16px;
+  
+
+    input {
+      border: none;
+      flex: 1;
+      width: 100%;
+      padding: 12px 0px;
+      font-family: $font-body;
+      font-size: 1.125rem;
+      font-weight: 400;
+      font-variation-settings: 'wght' 400;
+    
+
+      &:focus {
+        border-color: clr(accent-high);
+      }
+
+      &::placeholder {
+        color: clr(neutral-gray-2);
+      }
+    }
+
+    i {
+      color: clr(accent);
+    }
+    
+  }
+}
+
+.form-item {
+  color: clr(text);
+  margin-bottom: 1em;
+  max-width: 32em;
+
+  @include clearfix;
+}
+
+.form-item__label {
+  display: block;
+  font-weight: 600;
+
+  @include xs {
+    display: block;
+    margin-right: 2%;
+    padding: 0.6em 0;
+  }
+}
+
+.form-item__textfield {
+  border: 1px solid clr(primary);
+  border-radius: 4px;
+  background: clr(neutral-white);
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+
+  &:focus {
+    border-color: clr(accent-high);
+  }
+
+  &::placeholder {
+    color: clr(text);
+  }
+}
+
+.form-item__description {
+  margin-top: 0.3em;
+}
+
+.form-fieldset {
+  border: none;
+  margin-bottom: 2em;
+  padding: 0;
+
+  .form-item {
+    margin-left: 1em;
+    max-width: 31em;
+  }
+}

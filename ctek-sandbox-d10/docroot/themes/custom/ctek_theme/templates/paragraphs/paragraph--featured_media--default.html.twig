@@ -1,0 +1,34 @@
+{%
+  set featured_media__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% if (content.field_video.entity.field_media_oembed_video[0].value) %}
+  {% set embed_url = content.field_video.entity.field_media_oembed_video[0].value %}
+
+  {% if 'youtu.be' in embed_url %} 
+    {% set embed_url = embed_url|replace({'youtu.be':'www.youtube.com/embed'}) %}
+  {% endif %}
+
+  {% set video_type = 'embed' %}
+  {% set video_content = "<iframe title='Test Video' width='854' height='480' frameborder='0' allowfullscreen='allowfullscreen' src='" ~ embed_url ~ "?autoplay=0&amp;start=0'></iframe>" %}
+{% elseif (content.field_video.entity.field_media_video_file.entity.uri.value) %}
+  {% set video_type = 'html5' %}
+  {% set video_url = file_url(content.field_video.entity.field_media_video_file.entity.uri.value) %}
+{% endif %}
+
+{% block featured_media %}
+	{% include "@molecules/featured-media/featured-media.twig" with {
+    featured_media_title: content.field_title.value,
+    featured_media_description: content.field_description.value,
+    featured_media_position: content.field_featured_media_position.value,
+    featured_media_image_src: file_url(content.field_image['#items'].entity.uri.value),
+    featured_media_image_alt: content.field_image['#items'].alt,
+    featured_media_video_type: video_type,
+    featured_media_video_content: video_content,
+    featured_media_video_urls: [video_url],
+  } %}
+{% endblock featured_media %}

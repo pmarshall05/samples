@@ -1,0 +1,11 @@
+services_search_title: 'Our Services'
+services_search_description: 'Search our services, programs, conditions and treatments lorem ipsum dolor sit amet, consectetur.'
+services_search_input_placeholder: 'Search by keyword or topic'
+services_search_input_icon: 'search'
+services_search_input_name: 'services-search'
+services_search_button:
+    label: 'Search'
+    type: 'primary'
+services_search_form_background: 'accent'
+total_items_count: 16
+services_search_results_sort_label: 'Sort by:'

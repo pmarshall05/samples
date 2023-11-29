@@ -1,0 +1,65 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+
+.card {
+  display: flex;
+  width: 400px;
+  padding: 22px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid clr(primary);
+  background: clr(neutral-white);
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.card__heading {
+  &-link {
+  }
+}
+
+.card__subheading {
+  color: clr(text);
+}
+
+.card__body {
+}
+
+.card__link {
+ 
+}
+
+.card__button {
+  
+}
+
+.card__image {
+  width: 100%;
+  height: 225px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.card__tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Variations */
+.card--bg {
+  background-color: clr(extended-accent-3);
+}

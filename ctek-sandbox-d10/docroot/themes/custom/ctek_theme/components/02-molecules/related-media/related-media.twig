@@ -1,0 +1,76 @@
+{% set related_media__base_class = related_media__base_class|default('related-media') %}
+{% set related_media__attributes = related_media__attributes|default([]) %}
+
+{% set related_media__attributes = related_media__attributes|merge({
+    'class': bem(related_media__base_class, related_media__modifiers, related_media__blockname, related_media__additional_classes),
+  }) %}
+
+<section {{ add_attributes(related_media__attributes) }}>
+	<div {{ bem ('inner',[], related_media__base_class) }}>
+		<div {{ bem ('header',[], related_media__base_class) }}>
+			{% if related_media_title %}
+			  	{% include "@atoms/text/headings/_heading.twig" with {
+			          heading_level: 2,
+			          heading: related_media_title,
+			    } %}
+			{% endif %}
+			<div {{ bem ('pager',[], related_media__base_class) }}>
+				<div {{ bem ('pager-left',[], related_media__base_class) }}>
+					{% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+	    				icon__name: 'arrow-left',
+	    				icon__style: 'solid',
+	  				} %}
+				</div>
+				<div {{ bem ('pager-right',[], related_media__base_class) }}>
+					{% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+	    				icon__name: 'arrow-right',
+	    				icon__style: 'solid',
+	  				} %}
+				</div>
+			</div>
+		</div>
+		<div {{ bem ('cards',[], related_media__base_class) }}>
+			{% for item in related_media_items %}
+				{% if loop.first %}
+				<div {{ bem ('card',[], related_media__base_class, ['current']) }}>
+				{% else %}
+				<div {{ bem ('card',[], related_media__base_class) }}>	
+				{% endif %}
+					{% if item.image_src %}
+						<div {{ bem ('image',[], related_media__base_class) }}>
+			      			{% include "@atoms/images/image/responsive-image.twig" with {
+			        			output_image_tag: true,
+			        			image_src: item.image_src,
+			        			image_alt: item.image_alt,
+			      			} %}
+			      		</div>
+					{% elseif item.video_type == 'embed' %}
+						<div {{ bem ('video',[], related_media__base_class) }}>
+			      			{% include "@atoms/videos/video.twig" with {
+			        			video__type: item.video_type,
+			        			video_content: item.video_content,
+			      			} %}
+			    		</div>
+					{% elseif item.video_type == 'html5' %}
+						<div {{ bem ('video',[], related_media__base_class) }}>
+			      			{% include "@atoms/videos/video.twig" with {
+			        			video__type: item.video_type,
+			        			video__urls: item.video_urls,
+			        			video_object__attributes: {'width': '100%', 'controls':'true'},
+			      			} %}
+			    		</div>
+					{% endif %}
+
+					{% if item.description %}
+						<div {{ bem ('description',[], related_media__base_class) }}>
+							{% include "@atoms/text/text/01-paragraph.twig" with {
+			          			paragraph_content: item.description,
+			          			paragraph_modifiers: ['small'],
+			        		} %}
+		        		</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

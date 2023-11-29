@@ -1,0 +1,47 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+$social-icon-size: 16px;
+
+.social-menu {
+  @include list-reset;
+  display: inline-flex;
+  gap: 10px;
+}
+
+.social-menu__item {
+  margin-bottom: $space-one-half;
+}
+
+.social-menu__link {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  text-decoration: none;
+  color: clr(text);
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.social-menu__icon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 50%;
+  color: clr(text-inverse);
+  border: 2px solid clr(accent);
+  background: clr(primary);
+}
+
+.social-menu__text {
+  font-weight: bold;
+}

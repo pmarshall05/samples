@@ -1,0 +1,59 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+$color-breadcrumb: clr(primary);
+$color-breadcrumb-hover: clr(primary);
+$color-breadcrumb-active: clr(accent);
+
+.breadcrumb {
+  @include list-reset;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+#system-breadcrumb {
+  display: none;
+}
+
+.breadcrumb__item,
+.breadcrumb__link,
+.breadcrumb__link:link,
+.breadcrumb__link:visited,
+.breadcrumb__link:focus {
+  color: $color-breadcrumb;
+  text-decoration: none;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-variation-settings: 'wght' 500;
+  line-height: 150%; /* 27px */
+}
+
+.breadcrumb__link:hover {
+  color: $color-breadcrumb-hover;
+  border-bottom: solid 1px clr(accent);
+}
+
+.breadcrumb__item {
+  
+  &::after {
+    margin-left: 24px;
+    content: '/';
+  }
+
+  &:last-child {
+    color: $color-breadcrumb-active;
+
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.breadcrumb_link:active {
+  color: $color-breadcrumb-active;
+}

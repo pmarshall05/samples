@@ -1,0 +1,32 @@
+{% set services_results_header__base_class = services_results_header__base_class|default('services-results-header') %}
+{% set services_results_header__attributes = services_results_header__attributes|default([]) %}
+
+{% set services_results_header__attributes = services_results_header__attributes|merge({
+    'class': bem(services_results_header__base_class, services_results_header__modifiers, services_results_header__blockname, services_results_header__additional_classes),
+}) %}
+
+{% if services_search_results_total > 0 %}
+<section {{ bem (services_results_header__base_class) }}>
+	<div {{ bem ('results-found',[], services_results_header__base_class) }}>
+		<div {{ bem ('count',[], services_results_header__base_class) }}>
+			{% include "@atoms/text/text/01-paragraph.twig" with {
+  				paragraph_content: services_search_results_total ~ ' Results found',
+			} %}
+		</div>
+		<div {{ bem ('term',[], services_results_header__base_class) }}>
+			{% include "@atoms/text/headings/_heading.twig" with {
+  				heading_level: 4,
+  				heading: services_search_results_keyword,
+			} %}
+		</div>
+	</div>
+	<div {{ bem ('sort',[], services_results_header__base_class) }}>
+		{% include "@atoms/forms/select/select.twig" with {
+			select_label: services_search_results_sort_label,
+			select_options: services_search_results_sort_options,
+			select_name: services_search_results_select_name,
+			select_id: services_search_results_select_name,
+		}%}
+	</div>
+</section>
+{% endif %}

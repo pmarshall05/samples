@@ -1,0 +1,29 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+.hero-service {
+	display: flex;
+	padding: 48px 120px;
+	align-items: center;
+	gap: 56px;
+	align-self: stretch;
+	color: clr(primary);
+	background: clr(extended-accent-3);
+
+	h1 {
+		color: clr(primary);
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		flex: 1 0 0;
+	}
+
+	&__image {
+		width: 600px;
+	}
+}

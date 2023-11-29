@@ -1,0 +1,13 @@
+{% set service_glossary__base_class = service_glossary__base_class|default('service-glossary') %}
+{% set service_glossary__attributes = service_glossary__attributes|default([]) %}
+
+{% set service_glossary__attributes = service_glossary__attributes|merge({
+    'class': bem(service_glossary__base_class, service_glossary__modifiers, service_glossary__blockname, service_glossary__additional_classes),
+}) %}
+
+
+<section {{ add_attributes(service_glossary__attributes) }}>
+	{% include "@molecules/tabs/tabs.twig" with {
+		tabs: tabs,
+  	} %}
+</section>

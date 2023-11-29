@@ -1,0 +1,10 @@
+services_search_results_total: 10
+services_search_results_keyword: 'cancer'
+services_search_results_sort_label: 'Sort: '
+services_search_results_sort_options:
+  - label: 'Title'
+    value: 'title'
+  - label: 'Relevancy'
+    value: 'relevance'
+    selected: true
+services_search_results_select_name: 'sort_by'

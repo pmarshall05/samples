@@ -1,0 +1,40 @@
+{% set footer__base_class = 'footer' %}
+
+<div {{ bem('bottom-contact', [], footer__base_class) }}>
+      {% include "@atoms/text/headings/_heading.twig" with {
+        heading_level: 5,
+        heading: 'Get in Touch',
+      } %}
+
+    <div {{ bem('bottom-contact-links', [], footer__base_class) }}>
+    	{% for item in items %}
+			{% set style = 'solid' %}
+			{% if (item.entity.field_icon[0].style == 'far') %}
+				{% set style = 'regular' %}
+			{% endif %}
+
+			{% if (menu_name) %} {# Populated by Drupal #}
+				{% include "@atoms/links/link/link.twig" with {
+			        link_url: item.url,
+			        link_content: item.title,
+			        link_type: 'icon',
+			        link_modifiers: ["icon","inverse"],
+			        link_icon: item.entity.field_icon[0].icon_name,
+			        link_icon_position: 'left',
+		        	link_icon_style: style,
+		    	} %}
+      		{% else %} {# Populated by Storybook #}
+        		{% include "@atoms/links/link/link.twig" with {
+			        link_url: item.url,
+			        link_content: item.title,
+			        link_type: 'icon',
+			        link_modifiers: ["icon","inverse"],
+			        link_icon: item.icon,
+			        link_icon_position: 'left',
+		        	link_icon_style: item.icon_style,
+		    	} %}
+      		{% endif %}
+		{% endfor %}
+        
+    </div>
+</div>

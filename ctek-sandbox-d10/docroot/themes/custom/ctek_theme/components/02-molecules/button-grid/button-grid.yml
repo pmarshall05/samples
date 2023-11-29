@@ -1,0 +1,43 @@
+button_grid_eyebrow: 'Optional Eyebrow Text'
+button_grid_title: 'Featured Services'
+button_grid_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+button_grid_items:
+  - label: 'Cardiovascular'
+    type: 'secondary'
+    icon: 'heart-pulse'
+    icon_position: 'right'
+    icon_style: 'solid'
+    url: #
+  - label: 'Cancer Care'
+    type: 'secondary'
+    url: #
+  - label: 'Orthopedics'
+    type: 'secondary'
+    url: #
+  - label: 'Neurology'
+    type: 'secondary'
+    icon: 'brain'
+    icon_position: 'right'
+    icon_style: 'solid'
+    url: #
+  - label: 'Bariatric Services'
+    type: 'secondary'
+    icon: 'weight-scale'
+    icon_position: 'right'
+    icon_style: 'solid'
+    url: #
+  - label: 'Plastic Surgery'
+    type: 'secondary'
+    url: #
+  - label: 'Women''s Care'
+    type: 'secondary'
+    icon: 'person-dress'
+    icon_position: 'right'
+    icon_style: 'solid'
+    url: #
+  - label: 'Primary Care'
+    type: 'secondary'
+    icon: 'user-doctor'
+    icon_position: 'right'
+    icon_style: 'solid'
+    url: #

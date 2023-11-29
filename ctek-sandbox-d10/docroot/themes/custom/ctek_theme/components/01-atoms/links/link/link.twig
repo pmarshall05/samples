@@ -1,0 +1,63 @@
+{#
+/**
+ * Available variables:
+ * - link_content - the content of the link (typically text)
+ * - link_url - the url this link should poing to
+ * - link_attributes - array of attribute,value pairs
+ * - link_base_class - the base class name
+ * - link_modifiers - array of modifiers to add to the base classname
+ * - link_blockname - blockname prepended to the base classname
+ *
+ * Available blocks:
+ * - link_content - used to replace the content of the link
+ *     Example: to insert the image component
+ */
+#}
+{% set link_base_class = link_base_class|default('link') %}
+    
+<a
+  {{ bem(link_base_class, link_modifiers, link_blockname, link_additional_classes) }}
+  {% for attribute, value in link_attributes %}
+    {{ attribute }}="{{ value }}"
+  {% endfor %}
+  href="{{ link_url }}"
+>
+  {% if (link_type == 'icon') and (link_icon_position == 'left') %}
+    {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+    icon__name: link_icon,
+    icon__style: link_icon_style,
+  } %}
+  {% endif %}
+
+  {% block link_content %}
+    {{ link_content }}
+  {% endblock %}
+
+  {% if (link_type == 'arrow') %}
+    {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+    icon__name: 'arrow-right',
+    icon__style: 'solid',
+  } %}
+  {% endif %}
+
+  {% if (link_type == 'arrow-external') %}
+    {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+    icon__name: 'up-right-from-square',
+    icon__style: 'solid',
+  } %}
+  {% endif %}
+
+  {% if (link_type == 'menu') %}
+    {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+    icon__name: 'angle-down',
+    icon__style: 'solid',
+  } %}
+  {% endif %}
+
+  {% if (link_type == 'icon') and (link_icon_position == 'right') %}
+    {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+    icon__name: link_icon,
+    icon__style: link_icon_style,
+  } %}
+  {% endif %}
+</a>

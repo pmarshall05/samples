@@ -1,0 +1,11 @@
+link_url: 'https://github.com/emulsify-ds/emulsify-design-system'
+link_content: 'This is my link text'
+link_attributes:
+  'target': '_blank'
+link_type: 'icon'
+link_icon: 'location-dot'
+link_icon_position: 'left'
+link_icon_style: 'solid'
+link_modifiers:
+  - 'icon'
+  - 'xsmall'

@@ -1,0 +1,4 @@
+service_image_src: 'https://picsum.photos/1280/720'
+service_image_alt: "This is the image's alt text"
+service_title: 'Cancer Care'
+service_subhead: 'Intro lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies a tortor quis tristique. Praesent varius nibh at leo iaculis, in tempus sem viverra.'

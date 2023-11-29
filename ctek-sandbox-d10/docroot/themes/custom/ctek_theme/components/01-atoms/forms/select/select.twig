@@ -1,0 +1,29 @@
+{% set form_select__base_class = form_select__base_class|default('form-select') %}
+{% set form_select__attributes = form_select__attributes|default([]) %}
+{% set form_select__additional_classes = 'form-item' %}
+
+{% set form_select__attributes = form_select__attributes|merge({
+    'class': bem(form_select__base_class, form_select__modifiers, form_select__blockname, form_select__additional_classes),
+  }) %}
+
+
+<div {{ add_attributes(form_select__attributes) }}>
+  {% if (select_label is not empty) %}
+    <div {{ bem ('label',[], form_select__base_class) }}>
+    <label for="{{ select_id }}">{{ select_label }}</label>
+    {% if (input_required == true) %}
+      <span class="required-indicator"><i class="fa-solid fa-asterisk"></i></span>
+    {% endif %}
+    </div>
+  {% endif %}
+
+  <div {{ bem ('dropdown-wrapper',[], form_select__base_class) }}>
+    <select {{ bem ('dropdown',[], form_select__base_class) }} id="{{ select_id }}" name="{{ select_name }}">
+      {% for selection in select_options %}
+          {% include "@atoms/forms/select/_select-item.twig" with {
+            select_item: selection
+          } %}
+        {% endfor %}
+    </select>
+  </div>
+</div>

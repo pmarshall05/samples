@@ -1,0 +1,28 @@
+{% set tabs = [] %}
+
+{% if content['#tabs'] %}
+	{% for tab in content['#tabs'] %}
+		{% set content_html = '' %}	
+
+		
+		{% for nid in tab.nodes %}
+			
+			{% set content_html = content_html ~ drupal_entity('node', nid, 'search_result')|render  %}	
+		{% endfor %}
+
+		{% set tabs = tabs|merge([{
+	      'label': tab.label,
+	      'content': content_html|raw,
+	      }]) 
+	    %}
+
+	{% endfor %}
+	
+
+	{% block service_glossary %}
+		{% include "@organisms/service-glossary/service-glossary.twig" with {
+			tabs: tabs,
+	  	} %}
+	{% endblock service_glossary %}
+
+{% endif %}

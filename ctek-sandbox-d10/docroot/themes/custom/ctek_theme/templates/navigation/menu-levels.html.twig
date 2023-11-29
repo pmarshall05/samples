@@ -1,0 +1,92 @@
+{% if menu_type == 'main' %}
+   {% set menu_items = [] %}
+
+   {% for item in items %}
+      {% set featured_links = [] %}
+      {% set mainUrl = '' %}
+      {% set mainUrlType = '' %}
+      {% set itemUrl = '' %}
+      {% set itemUrlType = '' %}
+
+      {# Main URL #}
+      {% if item.entity.field_submenu[0].entity.field_main_link[0].url.external %}
+         {% set mainUrl = item.entity.field_submenu[0].entity.field_main_link[0].uri %}
+         {% set mainUrlType = 'external' %}
+      {% else %}
+         {% set mainUrl = item.entity.field_submenu[0].entity.field_main_link[0].uri|replace({'internal:':''}) %}
+         {% set mainUrlType = 'internal' %}
+      {% endif %}
+
+      {% set main_link = {
+         'title': item.entity.field_submenu[0].entity.field_main_link[0].title,
+         'url': mainUrl,
+         'external':  mainUrlType,
+      } %}
+
+      {# Featured Links #}
+      {% for link in item.entity.field_submenu[0].entity.field_featured_links %}
+         {% set featuredUrl = '' %}
+         {% set featuredUrlType = '' %}
+
+         {% if link.url.external %}
+            {% set featuredUrl = link.uri %}
+            {% set featuredUrlType = 'external' %}
+         {% else %}
+            {% set featuredUrl = link.uri|replace({'internal:':''}) %}
+            {% set featuredUrlType = 'internal' %}
+         {% endif %}
+
+         {% set featured_links = featured_links|merge([{
+            'title': link.title,
+            'url': featuredUrl,
+            'external':  featuredUrlType,
+         }]) %}
+      {% endfor %}
+
+      {# Featured Item #}
+      {% if item.entity.field_submenu[0].entity.field_featured_item_url[0].url.external %}
+         {% set itemUrl = item.entity.field_submenu[0].entity.field_featured_item_url[0].uri %}
+         {% set itemUrlType = 'external' %}
+      {% else %}
+         {% set itemUrl = item.entity.field_submenu[0].entity.field_featured_item_url[0].uri|replace({'internal:':''}) %}
+         {% set itemUrlType = 'internal' %}
+      {% endif %}
+
+      {% set featured_item = {
+         'image_src': file_url(item.entity.field_submenu[0].entity.field_featured_item_image.entity.field_media_image.entity.fileuri),
+         'title': item.entity.field_submenu[0].entity.field_featured_item_url[0].title,
+         'url': itemUrl,
+         'external':  itemUrlType,
+      } %}
+      
+
+      {% set submenu = {
+         'description': item.entity.field_submenu[0].entity.field_description.value,
+         'main_link': main_link,
+         'featured_links': featured_links,
+         'featured_item': featured_item,
+      } %}
+
+      {% set menu_items = menu_items|merge([{
+         'title': item.title,
+         'url': item.url,
+         'submenu': submenu,
+         }]) 
+      %}
+   {% endfor %}
+
+   {% include "@molecules/menus/main-menu/main-menu.twig" with {
+      menu_items: menu_items,
+      }
+   %}
+{% elseif menu_type == 'social' %} 
+   {% include "@molecules/menus/social-menu/social-menu.twig" with {
+      social_menu_items: items,
+      }
+   %}
+{% elseif menu_type == 'footer' %} 
+   {% include "@molecules/menus/footer/footer.twig" with {
+      footer_menu_items: items,
+      }
+   %}
+{% endif %}

@@ -1,0 +1,29 @@
+{%
+  set button__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% set style = 'solid' %}
+{% if (content.field_icon[0].style == 'far') %}
+  {% set style = 'regular' %}
+{% endif %}
+
+{% if content.field_url[0].url.external %}
+  {% set btnUrl = content.field_url[0].uri %}
+{% else %}
+  {% set btnUrl = content.field_url[0].uri|replace({'internal:':''}) %}
+{% endif %}
+
+{% block button %}
+  {% include "@atoms/buttons/button.twig" with {
+    button__content: content.field_label.value,
+	  button_url: btnUrl,
+	  button_icon: content.field_icon[0].icon_name,
+	  button_icon_position: content.field_icon_position.value,
+	  button_icon_style: style,
+    button__modifiers: content.field_button_type.value
+  } %}
+{% endblock button %}

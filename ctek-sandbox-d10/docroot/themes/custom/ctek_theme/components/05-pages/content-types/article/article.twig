@@ -1,0 +1,36 @@
+{% set article__base_class = article__base_class|default('article') %}
+{% set article__attributes = article__attributes|default([]) %}
+
+{% set article__attributes = article__attributes|merge({
+  'class': bem(article__base_class, article__modifiers, article__blockname, article__additional_classes),
+}) %}
+
+
+<article {{ add_attributes(article__attributes) }}>
+  {% include "@organisms/hero/article/article.twig" with {
+    article_image_src: article_image_src,
+    article_image_alt: article_image_alt,
+    article_image_caption: article_image_caption,
+    article_title: article_title,
+    article_summary: article_summary,
+  } %}
+
+  {% if (breadcrumb == null) %} {# Populated by Drupal #}
+    {{ drupal_breadcrumb() }}
+  {% else %} {# Populated by Storybook #}
+    {% include "@molecules/menus/breadcrumbs/breadcrumbs.twig" %}
+  {% endif %}
+
+  
+    
+  <section {{ bem ('body',[], article__base_class,['text-long']) }}>
+    {{article_body | raw }}
+  </section>
+
+  {% if tags %}
+   {% block tags %}
+      {% include "@atoms/tags/tags.twig" %}
+    {% endblock tags %}
+  {% endif %}
+
+</article>

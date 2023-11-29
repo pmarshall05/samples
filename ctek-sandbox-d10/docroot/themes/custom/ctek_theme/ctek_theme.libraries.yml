@@ -1,0 +1,26 @@
+global:
+  css:
+    theme:
+      dist/css/style.css: {}
+      https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900: { type: external }
+      https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800: { type: external }
+  
+  js:
+    dist/js/02-molecules/menus/main-menu/main-menu.js: {}
+    dist/js/02-molecules/menus/utility-menu/utility-menu.js: {}
+    dist/js/02-molecules/selector/usertype/usertype.js: {}
+    dist/js/02-molecules/selector/language/language.js: {}
+    dist/js/02-molecules/related-links/related-links.js: {}
+    dist/js/02-molecules/related-media/related-media.js: {}
+    dist/js/02-molecules/tabs/tabs.js: {}
+    dist/js/02-molecules/search/service/services-search.js: {}
+  dependencies:
+    - core/drupal
+
+
+# IE 11 support for SVG use - disable if not needed.
+# See also components/01-atoms/images/icons/_icon.twig to remove attach_library.
+# sprite:
+#   js:
+#     components/01-atoms/images/icons/svgxuse.min.js:
+#       { attributes: { defer: true } }

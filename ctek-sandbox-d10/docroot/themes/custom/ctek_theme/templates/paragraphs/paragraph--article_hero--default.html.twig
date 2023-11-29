@@ -1,0 +1,17 @@
+{%
+  set hero_article__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% block article_hero %}
+  {% include "@organisms/hero/article/article.twig" with {
+    article_image_src: file_url(content.field_image['#items'].entity.uri.value),
+    article_image_alt: content.field_image['#items'].alt,
+    article_image_caption: content.field_image_caption['#items'].value,
+    article_title: content.field_title['#items'].value,
+    article_summary: content.field_description['#items'].value,
+  } %}
+{% endblock article_hero %}

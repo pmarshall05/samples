@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Theme override of a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+
+{% set search_button = drupal_field('field_button', 'block_content', 25) %}
+{% set title = drupal_field('field_title', 'block_content', 25) %}
+{% set description = drupal_field('field_description', 'block_content', 25) %}
+{% set placeholder = drupal_field('field_input_placeholder_text', 'block_content', 25) %}
+{% set background = drupal_field('field_search_form_background', 'block_content', 25) %}
+{% set icon = drupal_field('field_icon', 'block_content', 25) %}	
+
+{% if search_button['#items'][0].entity %}
+	{% set style = 'solid' %}
+	{% if (search_button['#items'][0].entity.field_icon[0].style == 'far') %}
+		{% set style = 'regular' %}
+	{% endif %}
+
+	{% set button = {
+		'label': search_button['#items'][0].entity.field_label[0].value,
+		'type': search_button['#items'][0].entity.field_button_type[0].value,
+		'icon': search_button['#items'][0].entity.field_icon[0].icon_name,
+		'icon_position': search_button['#items'][0].entity.field_icon_position[0].value,
+		'icon_style': style,
+	} %}
+{% endif %}
+
+{% block services_search %}
+	{% include "@molecules/search/service/services-search.twig" with {
+		services_search_title: title['#items'][0].value,
+		services_search_description: description['#items'][0].value,
+		services_search_input_placeholder: placeholder['#items'][0].value,
+		services_search_input_icon: icon['#items'][0].icon_name,
+		services_search_input_name: form['#info']['filter-search_api_fulltext']['value'],
+		services_search_button: button,
+		services_search_action: form['#action'],
+		services_search_form_background: background['#items'][0].value,
+		services_search_input_value: form['keyword']['#value'],
+  } %}
+{% endblock services_search %}

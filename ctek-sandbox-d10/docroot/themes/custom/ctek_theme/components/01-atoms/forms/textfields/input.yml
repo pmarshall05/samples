@@ -1,0 +1,6 @@
+input_placeholder: 'Placeholder text'
+input_icon: 'search'
+input_label: 'Label'
+input_required: true
+input_name: 'name'
+input_id: 'name'

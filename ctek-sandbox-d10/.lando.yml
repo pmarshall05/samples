@@ -1,0 +1,82 @@
+name: ctek-sandbox-d10
+recipe: drupal10
+config:
+  webroot: docroot
+  php: '8.2'
+services:
+  appserver:
+    composer_version: 2
+    overrides:
+      environment:
+        PHP_SENDMAIL_PATH: '/usr/sbin/sendmail -S mailhog:1025'
+        DRUSH_OPTIONS_URI: "https://ctek.lndo.site"
+    ports:
+        - 6006:6006
+        - 32778:32778
+    build:
+      - composer install
+    build_as_root:
+      # Note that you will want to use the script for the major version of node you want to install
+      # See: https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
+      - curl -sL https://deb.nodesource.com/setup_18.x | bash -
+      - apt-get install -y nodejs
+      - apt install -y chromium
+      - chown -R www-data /usr/lib/node_modules
+      - chown -R www-data /usr/bin
+      - npm install -g npm
+      - npm install -g @emulsify/cli
+    run_as_root:
+      - echo "Build CTEK Theme"
+      - cd /app/docroot/themes/custom/ctek_theme && npm install && npm run build
+      - echo "Import DB"
+      - /app/vendor/bin/drush sql-cli < sql/database-backup.sql
+  solr: 
+    type: 'solr:8.11'
+    core: 'ctek_demo'
+    portforward: 8983
+    config:
+      dir: solr/conf
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
+proxy:
+  mailhog:
+    - mail.lndo.site
+  solr:
+    - solr.lndo.site:8983
+  appserver:
+    - ctek.lndo.site
+    - browsersync.ctek.lndo.site:32778
+    - storybook.ctek.lndo.site:6006
+tooling:
+  drush:
+    service: appserver
+    cmd: /app/vendor/bin/drush --root=/app/docroot
+  node:
+    service: appserver
+  npm:
+    service: appserver
+    dir: /app/docroot/themes/custom/ctek_theme
+  emulsify:
+    service: appserver
+  storybook-local:
+    # Deploy storybook
+    service: appserver
+    dir: /app/docroot/themes/custom/ctek_theme
+    cmd: npm run develop
+  storybook-build:
+    # Build storybook static folder to be run on server
+    service: appserver
+    dir: /app/docroot/themes/custom/ctek_theme
+    cmd: npm run storybook-build
+  import-db:
+    service: appserver
+    cmd:
+      - /app/vendor/bin/drush sql-drop -y
+      - /app/vendor/bin/drush --root=/app/docroot --uri=https://ctek.lndo.site sqlq --file=/app/sql/database-backup.sql
+      - /app/vendor/bin/drush cr -y
+  solr:
+    service: solr
+    cmd: /opt/solr/bin/solr

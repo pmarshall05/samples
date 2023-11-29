@@ -1,0 +1,71 @@
+definitions:
+  steps:
+    - parallel:
+        - step: &frontend
+            image: centretekdigital/pipeline:3.0
+            artifacts:
+              - docroot/themes/custom/ctek_theme/dist/**
+              - storybook_static/**
+            script:
+              - cd docroot/themes/custom/ctek_theme
+              - nvm install
+              - npm install
+              - npm run build
+              - npm run storybook-build
+        - step: &backend
+            image: centretekdigital/pipeline:3.0
+            artifacts:
+              - drush/contrib/**
+              - vendor/**
+              - docroot/core/**
+              - docroot/modules/contrib/**
+              - docroot/themes/contrib/**
+              - docroot/profiles/contrib/**
+            script:
+              - composer install --ignore-platform-reqs
+    - step: &deploy
+        image: centretekdigital/pipeline:3.0
+        max-time: 15
+        script:
+          - composer ctek-deploy
+  caches:
+    ohana:
+      docroot/themes/custom/ohana/node_modules
+pipelines:
+  branches:
+    feature/pipeline:
+      - parallel:
+          - step:
+              <<: *frontend
+              name: Dev Frontend Build
+          - step:
+              <<: *backend
+              name: Dev Backend Build
+      - step:
+          <<: *deploy
+          name: Deploy to Dev
+          deployment: dev
+    stage:
+      - parallel:
+          - step:
+              <<: *frontend
+              name: Staging Frontend Build
+          - step:
+              <<: *backend
+              name: Staging Backend Build
+      - step:
+          <<: *deploy
+          name: Deploy to Staging
+          deployment: staging
+    main:
+      - parallel:
+          - step:
+              <<: *frontend
+              name: Prod Frontend Build
+          - step:
+              <<: *backend
+              name: Prod Backend Build
+      - step:
+          <<: *deploy
+          name: Deploy to Prod
+          deployment: prod

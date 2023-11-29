@@ -1,0 +1,17 @@
+{% set menu_items = [] %}
+
+{% for item in content.field_menu_items %}
+	{% set menu_items = menu_items|merge([
+    	{
+    		'title': item.field_title,
+    		'url': item.field_url,
+    		'icon': item.field_icon,
+    	}
+	]) %}
+{% endfor %}
+
+{% block social__menu %}
+  {% include "@molecules/menus/social-menu/social-menu.twig" with 
+  		social_menu_items: menu_items,
+  %}
+{% endblock %}

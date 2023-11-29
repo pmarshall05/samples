@@ -1,0 +1,51 @@
+{% set button_grid__base_class = button_grid__base_class|default('button-grid') %}
+{% set button_grid__attributes = button_grid__attributes|default([]) %}
+
+{% set button_grid__attributes = button_grid__attributes|merge({
+    'class': bem(button_grid__base_class, button_grid__modifiers, button_grid__blockname, button_grid__additional_classes),
+  }) %}
+
+<section {{ add_attributes(button_grid__attributes) }}>
+	<div {{ bem ('content',[], button_grid__base_class) }}>
+	{% if button_grid_eyebrow %}
+		{% include "@atoms/text/text/09-eyebrow.twig" with {
+          eyebrow_content: button_grid_eyebrow,
+        } %}
+	{% endif %}
+  	{% if button_grid_title %}
+	  	{% include "@atoms/text/headings/_heading.twig" with {
+	          heading_level: 2,
+	          heading: button_grid_title,
+	    } %}
+	{% endif %}
+	{% if button_grid_description %}
+		{% include "@atoms/text/text/01-paragraph.twig" with {
+          paragraph_content: button_grid_description,
+          paragraph_modifiers: ['large'],
+        } %}
+	{% endif %}
+  </div>
+  
+  {% if button_grid_items %}
+  <div {{ bem ('items',[], button_grid__base_class) }}>
+  	{% for row in button_grid_items|batch(4) %}
+  		<div  {{ bem ('row',[], button_grid__base_class) }}>
+  			{% for button in row %}
+	  			<div {{ bem ('row-button',[], button_grid__base_class) }}>
+			  	{% include "@atoms/buttons/button.twig" with {
+				  	button__content: button.label,
+			  		button__modifiers: button.type,
+			  		button_url: button.url,
+			  		button_icon: button.icon,
+					button_icon_position: button.icon_position,
+					button_icon_style: button.icon_style,
+				}%}
+			  	</div>
+			  	
+  			{% endfor %}
+  		</div>
+  	{% endfor %}
+  </div>
+{% endif %}
+
+</section>

@@ -1,0 +1,16 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+
+@mixin grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid {
+  @include grid;
+
+  &--card {
+    @include space-stack-page;
+  }
+}

@@ -1,0 +1,52 @@
+{% set quick_links__base_class = quick_links__base_class|default('quick-links') %}
+{% set quick_links__attributes = quick_links__attributes|default([]) %}
+
+{% set quick_links__attributes = quick_links__attributes|merge({
+    'class': bem(quick_links__base_class, quick_links__modifiers, quick_links__blockname, quick_links__additional_classes),
+  }) %}
+
+<section {{ add_attributes(quick_links__attributes) }}>
+	<div {{ bem ('inner',[], quick_links__base_class) }}>
+		<div {{ bem ('content',[], quick_links__base_class) }}>
+		{% if quick_links_eyebrow %}
+			{% include "@atoms/text/text/09-eyebrow.twig" with {
+	          eyebrow_content: quick_links_eyebrow,
+	        } %}
+		{% endif %}
+	  	{% if quick_links_title %}
+		  	{% include "@atoms/text/headings/_heading.twig" with {
+		          heading_level: 2,
+		          heading: quick_links_title,
+		    } %}
+		{% endif %}
+		{% if quick_links_description %}
+			{% include "@atoms/text/text/01-paragraph.twig" with {
+	          paragraph_content: quick_links_description,
+	          paragraph_modifiers: ['large'],
+	        } %}
+		{% endif %}
+	  </div>
+	  <div {{ bem ('cards',[], quick_links__base_class) }}>
+	  	{% for row in quick_links_items|batch(2) %}
+	  		<div {{ bem ('row',[], quick_links__base_class) }}>
+	  			{% for item in row %}
+	  				<div {{ bem ('card',[], quick_links__base_class) }}>
+							{% if item.title %}
+						  	{% include "@atoms/text/headings/_heading.twig" with {
+						          heading_level: 4,
+						          heading: item.title,
+						          heading_url: item.url,
+						    } %}
+						{% endif %}
+						{% if item.description %}
+							{% include "@atoms/text/text/01-paragraph.twig" with {
+					          paragraph_content: item.description,
+					        } %}
+						{% endif %}
+		  			</div>
+	  			{% endfor %}
+	  		</div>
+	  	{% endfor %}
+	  </div>
+	</div>
+</section>

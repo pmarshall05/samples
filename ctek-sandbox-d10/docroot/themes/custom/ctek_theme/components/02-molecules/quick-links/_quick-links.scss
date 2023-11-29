@@ -1,0 +1,79 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+
+.quick-links {
+  	display: flex;
+	align-items: flex-start;
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 32px;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+
+		.heading , .eyebrow {
+			color: clr(primary);
+			margin: 0;
+		}
+	}
+
+	&__cards {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 32px;		
+	}
+
+	&__row {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 56px;
+	}
+
+	&__card {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		align-self: stretch;
+		border-radius: 4px;
+		gap: 16px;
+	}
+
+	&--accent {
+		background: clr(accent);
+
+		.quick-links__inner {
+			@include wrapper;
+			margin: 80px auto;
+		}
+
+		.heading , .eyebrow, .paragraph {
+			color: clr(text-inverse);
+			margin: 0;
+
+			.link {
+				color: clr(text-inverse);
+      			border-bottom: solid 1px clr(text-inverse);
+
+    			&:hover {
+      				color: clr(text-inverse);
+      				border-bottom: solid 1px clr(text-inverse);
+    			}
+			}
+		}
+	}
+}

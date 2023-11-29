@@ -1,0 +1,68 @@
+{% set featured_facts__base_class = featured_facts__base_class|default('featured-facts') %}
+{% set featured_facts__attributes = featured_facts__attributes|default([]) %}
+
+{% set featured_facts__attributes = featured_facts__attributes|merge({
+    'class': bem(featured_facts__base_class, featured_facts__modifiers, featured_facts__blockname, featured_facts__additional_classes),
+  }) %}
+
+<section {{ add_attributes(featured_facts__attributes) }}>
+	<div {{ bem ('inner',[], featured_facts__base_class) }}>
+		<div {{ bem ('content',[], featured_facts__base_class) }}>
+			{% if featured_facts_eyebrow %}
+				{% include "@atoms/text/text/09-eyebrow.twig" with {
+	            	eyebrow_content: featured_facts_eyebrow,
+	        	} %}
+        	{% endif %}
+
+        	{% if featured_facts_title %}
+				{% include "@atoms/text/headings/_heading.twig" with {
+	            	heading_level: 2,
+	            	heading: featured_facts_title,
+	        	} %}
+	        {% endif %}
+
+	        {% if featured_facts_description %}
+				{% include "@atoms/text/text/01-paragraph.twig" with {
+	                paragraph_content: featured_facts_description,
+	            } %}
+	        {% endif %}
+
+
+            {% if ('accent' in featured_facts__modifiers or 'primary' in featured_facts__modifiers) %}
+            	{% set lg_modifiers = ['column','inverse'] %}
+            {% else %}
+            	{% set lg_modifiers = ['column'] %}
+            {% endif %}
+           
+  			<div {{ bem ('link-group',[], featured_facts__base_class) }}>
+  				{% include "@molecules/link-group/link-group.twig" with {
+		  			linkgroup_items: featured_facts_link_group,
+		  			linkgroup__modifiers: lg_modifiers,
+		  		}%}
+ 			</div>
+
+ 			<div {{ bem ('button',[], featured_facts__base_class) }}>
+			  	{% include "@atoms/buttons/button.twig" with {
+				  	button__content: featured_facts_button.label,
+			  		button__modifiers: [featured_facts_button.type],
+			  		button_url: featured_facts_button.url,
+			  		button_icon: featured_facts_button.icon,
+					button_icon_position: featured_facts_button.icon_position,
+					button_icon_style: featured_facts_button.icon_style,
+				}%}
+			  	</div>
+        </div>
+		
+		<div {{ bem ('cards',[], featured_facts__base_class) }}>
+			{% for row in featured_facts_items|batch(2) %}
+				<div {{ bem ('cards-row',[], featured_facts__base_class) }}>
+				{% for item in row %}
+					{% include "@molecules/featured-facts/_featured_facts_card.twig" with {
+		  				item: item,
+		  			}%}
+		  		{% endfor %}
+		  		</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,24 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__tab {
+    display: none;
+
+    &.is-active {
+      display: flex;
+    }
+  }
+
+}

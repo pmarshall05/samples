@@ -1,0 +1,15 @@
+select_label: 'Select Dropdown:'
+select_name: 'select'
+select_id: 'select'
+select_options:
+  - label: 'Choose an Option'
+    value: 0
+    selected: true
+  - label: 'Option 1'
+    value: 1
+  - label: 'Option 2'
+    value: 2
+  - label: 'Option 3'
+    value: 3
+  - label: 'Option 4'
+    value: 4

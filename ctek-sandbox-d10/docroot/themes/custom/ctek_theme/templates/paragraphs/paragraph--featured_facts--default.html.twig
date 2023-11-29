@@ -1,0 +1,114 @@
+{%
+  set featured_facts__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% if (content.field_link_group) %}
+	{% set linkgroup_items = [] %}
+	
+	{% for item in content.field_link_group['#items'][0].entity.field_link_group_items %}
+		{% set itemUrl = '' %}
+		{% set type = '' %}
+		{% set style = 'solid' %}
+
+		{% if (item.entity.field_icon[0].style == 'far') %}
+			{% set style = 'regular' %}
+		{% endif %}
+
+		{% if item.entity.field_url[0].url.external %}
+			{% set itemUrl = item.entity.field_url[0].uri %}
+			{% set type = 'arrow-external' %}
+		{% else %}
+			{% set itemUrl = item.entity.field_url[0].uri|replace({'internal:':''}) %}
+		    {% set type = 'arrow' %}
+		{% endif %}
+
+		{% set linkgroup_items = linkgroup_items|merge([{
+			'title': item.entity.field_url[0].title,
+			'url': itemUrl,
+    		'type': type,
+    		'icon': item.entity.field_icon[0].icon_name,
+    		'icon_color': item.entity.field_icon_color.value,
+    		'icon_position': item.entity.field_icon_position.value|lower,
+    		'icon_style': style,
+			}]) 
+		%}
+	{% endfor %}
+{% endif %}
+
+
+
+{% if (content.field_button) %}
+	{% set style = 'solid' %}
+
+	{% if (content.field_button['#items'][0].entity.field_icon[0].style == 'far') %}
+		{% set style = 'regular' %}
+	{% endif %}
+
+	{% if content.field_button['#items'][0].entity.field_url[0].url.external %}
+		{% set itemUrl = content.field_button.entity.field_url[0].uri %}
+	{% else %}
+		{% set itemUrl = content.field_button['#items'][0].entity.field_url[0].uri|replace({'internal:':''}) %}
+	{% endif %}
+
+	{% set button = {
+	    'label': content.field_button['#items'][0].entity.field_label.value,
+	    'type': content.field_button['#items'][0].entity.field_button_type.value,
+	    'url': itemUrl,
+	    'icon': content.field_button['#items'][0].entity.field_icon[0].icon_name,
+	    'icon_position': content.field_button['#items'][0].entity.field_icon_position.value|lower,
+	    'icon_style': style,
+	   } 
+	%}
+{% endif %}
+
+{% if content.field_featured_facts_background %} 
+	{% set featured_facts__modifiers = [content.field_featured_facts_background['#items'][0].value] %}
+{% endif %}
+
+{% if (content.field_statistics) %}
+	{% set facts = [] %}
+
+	{% for item in content.field_statistics['#items'] %}
+		{% set style = 'solid' %}
+
+		{% if (item.entity.field_icon[0].style == 'far') %}
+			{% set style = 'regular' %}
+		{% endif %}
+
+		{% if item.entity.field_url[0].url.external %}
+			{% set itemUrl = item.entity.field_url[0].uri %}
+		{% else %}
+			{% set itemUrl = item.entity.field_url[0].uri|replace({'internal:':''}) %}
+		{% endif %}
+
+		{% set facts = facts|merge([{
+			'fact': item.entity.field_statistic.value,
+			'link': {
+				'title': item.entity.field_url[0].title,
+				'url': itemUrl,
+			},
+			'background': item.entity.field_statistic_background.value,
+    		'icon': item.entity.field_icon[0].icon_name,
+    		'icon_color': item.entity.field_icon_color.value,
+    		'icon_style': style,
+			}]) 
+		%}
+
+	{% endfor %}
+
+{% endif %}
+
+{% block featured_facts %}
+	{% include "@molecules/featured-facts/featured-facts.twig" with {
+    featured_facts_eyebrow: content.field_eyebrow['#items'][0].value,
+    featured_facts_title: content.field_title['#items'][0].value,
+    featured_facts_description: content.field_description['#items'][0].value,
+    featured_facts_link_group: linkgroup_items,
+    featured_facts_button: button,
+    featured_facts_items: facts,
+  } %}
+{% endblock featured_facts %}

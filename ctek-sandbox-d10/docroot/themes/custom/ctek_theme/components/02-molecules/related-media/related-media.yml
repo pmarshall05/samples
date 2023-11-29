@@ -1,0 +1,17 @@
+related_media_title: 'Related Media'
+related_media_items:
+  - image_src: 'https://picsum.photos/1280/720'
+    image__alt: "This is the card image's alt text"
+    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  - video_type: 'html5'
+    video_urls: 
+      - 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4'
+      - 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-webm-file.webm'
+    description: 'Introduction lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+  - video_type: 'embed'
+    video_content: "<iframe title='Test Video' width='854' height='480' frameborder='0' allowfullscreen='allowfullscreen' src='https://www.youtube.com/embed/YRnVnlhjOBs?autoplay=0&amp;start=0'></iframe>"
+    description: 'Introduction lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+  - image_src: 'https://picsum.photos/1280/720'
+    image__alt: "This is the card image's alt text"
+    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  

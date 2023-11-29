@@ -1,0 +1,7 @@
+language__selector_content: 'English'
+language__selector_description: '<p>Select a different language from the list below:</p>'
+language__selector_types:
+  - name: 'English'
+    code: 'en'
+  - name: 'Spanish (Español)'
+    code: 'es'

@@ -1,0 +1,29 @@
+media_card_items:
+  - content_type: 'service'
+    title: 'Cancer Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'
+  - content_type: 'service'
+    title: 'Breast Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'
+  - content_type: 'service'
+    title: 'Primary Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'
+  - content_type: 'service'
+    title: 'Pediatric Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'

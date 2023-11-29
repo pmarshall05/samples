@@ -1,0 +1,68 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+
+.hero-ctas {
+	display: flex;
+	padding: 24px 40px;
+	align-items: flex-start;
+	box-shadow: 0px 4px 20px 0px clr(extended-accent-1);
+
+	&:has(.linkgroup--row) {
+		justify-content: center;
+	}
+
+	&:has(.linkgroup--column) {
+		display: inline-flex;
+		justify-content: flex-start;
+	}
+	
+	i {
+		font-size: 2.0rem;
+	}
+	
+	.linkgroup {
+		gap: 80px;
+		
+
+		&--row {
+			justify-content: center;
+		}
+
+		&--column {
+			flex-basis: fit-content;
+		}
+
+		.link--icon-color-primary {
+			i {
+				color: clr(primary);
+			}
+		}
+
+		.link--icon-color-secondary {
+			i {
+				color: clr(secondary);
+			}
+		}
+
+		.link--icon-color-accent {
+			i {
+				color: clr(accent);
+			}
+		}
+
+		.link--icon-color-star-rating {
+			i {
+				color: clr(star-rating);
+			}
+		}
+
+		.link--icon-color-error {
+			i {
+				color: clr(error);
+			}
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{% set service_teaser__base_class = service_teaser__base_class|default('service-teaser') %}
+{% set service_teaser__attributes = service_teaser__attributes|default([]) %}
+
+{% set service_teaser__attributes = service_teaser__attributes|merge({
+'class': bem(service_teaser__base_class, service_teaser__modifiers, service_teaser__blockname, service_teaser__additional_classes),
+}) %}
+
+<div {{ add_attributes(service_teaser__attributes) }}>
+    {% include "@molecules/card/card.twig" with {
+      card__heading: service_teaser_heading,
+      card__heading__link: service_teaser_heading_link|default(service_teaser_link_url),
+      card__image__src: service_teaser_image_src,
+      card__image__alt: service_teaser_image_alt,
+      card__image__output_image_tag: true,
+    } %}
+</div>

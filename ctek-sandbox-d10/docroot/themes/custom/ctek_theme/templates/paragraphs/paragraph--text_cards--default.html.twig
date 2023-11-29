@@ -1,0 +1,29 @@
+{%
+  set text_cards__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% if (content.field_text_card_items) %}
+	{% set list_items = [] %}
+	{% set url = '' %}
+
+	{% for item in content.field_text_card_items['#items'] %}
+		{% set list_items = list_items|merge([{
+			'title': item.entity.field_title.value,
+    		'description': item.entity.field_description.value,
+			}]) 
+		%}
+	{% endfor %}
+{% endif %}
+
+{% block text_cards %}
+	{% include "@molecules/text-cards/text-cards.twig" with {
+    text_cards_eyebrow: content.field_eyebrow['#items'][0].value,
+    text_cards_title: content.field_title['#items'][0].value,
+    text_cards_description: content.field_description['#items'][0].value,
+    text_cards_items: list_items,
+  } %}
+{% endblock text_cards %}

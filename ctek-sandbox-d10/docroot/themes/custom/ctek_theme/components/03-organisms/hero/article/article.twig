@@ -1,0 +1,58 @@
+{% set hero_article__base_class = hero_article__base_class|default('hero-article') %}
+{% set hero_article__attributes = hero_article__attributes|default([]) %}
+
+{% if article_image_src %}
+  {% set hero_article__modifiers = ['has-image'] %}
+{% endif %}
+{% set hero_article__attributes = hero_article__attributes|merge({
+    'class': bem(hero_article__base_class, hero_article__modifiers, hero_article__blockname, hero_article__additional_classes),
+  }) %}
+
+<section {{ add_attributes(hero_article__attributes) }}>
+  <div {{ bem ('bg',[], hero_article__base_class) }}>
+    <div {{ bem ('heading',[], hero_article__base_class) }}>
+      {# Title #}
+      {% if article_title %}
+      <div {{ bem ('heading-title',[], hero_article__base_class) }}>
+        {% include "@atoms/text/headings/_heading.twig" with {
+          heading_level: 1,
+          heading: article_title,
+        } %}
+      </div>
+      {% endif %}
+      {# Summary #}
+      {% if article_summary %}
+        <div {{ bem ('heading-summary',[], hero_article__base_class) }}>
+         {% include "@atoms/text/text/08-subhead.twig" with {
+          subhead_content: article_summary,
+         } %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {# Image #}
+  {% if article_image_src and article_image_caption %}
+    <div {{ bem ('image',[], hero_article__base_class) }}>
+      <div {{ bem ('image-inner',[], hero_article__base_class) }}>
+        {% include "@atoms/images/image/figure.twig" with {
+          output_image_tag: true,
+          image_src: article_image_src,
+          image_alt: article_image_alt,
+          image_caption: article_image_caption,
+        } %}
+      </div>
+    </div>
+  {% elseif article_image_src %}
+    <div {{ bem ('image',[], hero_article__base_class) }}>
+      <div {{ bem ('image-inner',[], hero_article__base_class) }}>
+         {% include "@atoms/images/image/responsive-image.twig" with {
+          output_image_tag: true,
+          image_src: article_image_src,
+          image_alt: article_image_alt,
+        } %}
+      </div>
+    </div>
+  {% endif %}
+
+   
+</section>

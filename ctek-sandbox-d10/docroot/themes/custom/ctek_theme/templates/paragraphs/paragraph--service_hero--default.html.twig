@@ -1,0 +1,17 @@
+{%
+  set hero_service__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% block service_hero %}
+  {% include "@organisms/hero/service/service.twig" with {
+    service_title: content.field_title['#items'].value,
+    service_subhead: content.field_description['#items'].value,
+    service_image_src: file_url(content.field_image['#items'].entity.uri.value),
+    service_image_alt: content.field_image['#items'].alt,
+    service_image_title: content.field_image['#items'].title,
+  } %}
+{% endblock service_hero %}

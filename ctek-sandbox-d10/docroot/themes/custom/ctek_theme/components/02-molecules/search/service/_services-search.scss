@@ -1,0 +1,89 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+.services-search {
+  	display: flex;
+	align-items: flex-start;
+	
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+		width: 100%;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+	}
+
+	&__form {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 24px;
+		align-self: stretch;
+	}
+
+	&__form-input {
+		flex-grow: 2;
+	}
+
+	&__form--primary {
+		background: clr(primary);
+		padding: 32px;
+	}
+
+	&__form--secondary {
+		background: clr(secondary);
+		padding: 32px;
+	}
+
+	&__form--accent {
+		background: clr(accent);
+		padding: 32px;
+	}
+	
+}
+
+.services-results-header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 80px;
+
+	&__results-found {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	&__count {
+		.paragraph {
+			font-weight: 700;
+			font-variation-settings: 'wght' 700;
+			text-transform: uppercase;
+			color: clr(primary);
+			margin: 0;
+		}
+	}
+
+	&__term {
+		.heading {
+			color: clr(primary);
+		}
+	}
+
+	&__sort {
+		.form-select {
+			display: flex;
+			flex-direction: row;
+			gap: 8px;
+			justify-content: center;
+			align-content: flex-start;
+		}
+	}
+}

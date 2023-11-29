@@ -1,0 +1,9 @@
+{% set footer_menu__base_class = 'footer-menu' %}
+
+<div {{ bem('columns', [], footer_menu__base_class) }}>
+    {% for item in footer_menu_items %}
+      {% include "@molecules/menus/footer/_footer_column.twig" with {
+        column: item,
+      }%}
+    {% endfor %}
+</div>

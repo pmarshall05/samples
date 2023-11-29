@@ -1,0 +1,13 @@
+linkgroup_items:
+  - title: 'Inline Link'
+    url: '#'
+  - title: 'Inline Link'
+    url: '#'
+  - title: 'Inline Link'
+    url: '#'
+  - title: 'Inline Link'
+    url: '#'
+  - title: 'Inline Link'
+    url: '#'
+linkgroup__modifiers:
+  - 'row'

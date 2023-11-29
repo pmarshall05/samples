@@ -1,0 +1,54 @@
+<div {{ bem('item-submenu', [], main_menu__base_class) }} style="display:none">
+    <div class="column1">
+      {% include "@atoms/text/headings/_heading.twig" with {
+        heading_level: 4,
+        heading: title,
+      } %}
+      {% include "@atoms/text/text/01-paragraph.twig" with {
+        paragraph_content: submenu.description,
+        paragraph_modifiers: ['small'],
+      } %}
+      {% include "@atoms/links/link/link.twig" with {
+        link_url: submenu.main_link.url,
+        link_content: submenu.main_link.title,
+        link_type: 'arrow',
+        link_modifiers: ["arrow"],
+      } %}
+    </div>
+
+    <div class="divider"></div>
+  
+
+    <div class="column2">
+      {% for link in submenu.featured_links %}
+        {% if loop.index % 4 == 1 %}
+          <div class="featured-links">
+        {% endif %}
+        
+          {% include "@atoms/links/link/link.twig" with {
+            link_url: link.url,
+            link_content: link.title,
+          } %}
+       
+        {% if loop.index % 4 == 0 or loop.last %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="column3">
+      <div class="featured-item__image">
+        {% include "@atoms/images/image/responsive-image.twig" with {
+          output_image_tag: true,
+          image_src: submenu.featured_item.image_src,
+        } %}
+      </div>
+      {% include "@atoms/text/headings/_heading.twig" with {
+        heading_level: 5,
+        heading: submenu.featured_item.title,
+        heading_url: submenu.featured_item.url,
+      } %}
+    </div>
+</div>

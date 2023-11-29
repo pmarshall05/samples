@@ -1,0 +1,57 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+.single-color-cta {
+	display: flex;
+	align-items: flex-start;
+
+	&__inner {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 48px;
+		margin: 48px;
+		width: 100%;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+		width: 75%;
+	}
+
+	&__button {
+		display: flex;
+		align-self: center;
+		justify-content: center;
+		width: 25%;
+	}
+
+	&--primary {
+		background: clr(primary);
+
+		.heading, .paragraph {
+			color: clr(text-inverse);
+		}
+	}
+
+	&--secondary {
+		background: clr(secondary);
+
+		.heading, .paragraph {
+			color: clr(text);
+		}
+	}
+
+	&--accent {
+		background: clr(accent);
+
+		.heading, .paragraph {
+			color: clr(text-inverse);
+		}
+	}
+}

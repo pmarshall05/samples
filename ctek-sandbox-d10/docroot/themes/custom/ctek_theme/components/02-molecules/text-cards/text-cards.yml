@@ -1,0 +1,13 @@
+text_cards_eyebrow: 'Eyebrow Text'
+text_cards_title: 'Types of Atrial Fibrillation'
+text_cards_description: 'There are four types lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+text_cards_items:
+  - title: 'Paraoxysmal AFib'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+  - title: 'Persistant AFib'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+  - title: 'Lorem Ipsum AFib'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+  - title: 'Lorem Ipsum AFib'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+ 

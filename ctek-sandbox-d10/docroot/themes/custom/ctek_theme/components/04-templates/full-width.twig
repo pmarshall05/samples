@@ -1,0 +1,33 @@
+{% extends "@templates/_default.twig" %}
+
+{% block page_header %}
+  {% include "@organisms/site/site-header/site-header.twig" %}
+{% endblock %}
+{% block page_hero %}
+  {% include "@templates/placeholder/place-holder.twig" with {
+    "place_holder": "Hero (Full Width)",
+  } %}
+{% endblock %}
+{% block page_breadcrumb %}
+  {% include "@templates/placeholder/place-holder.twig" with {
+    "place_holder": "Breadcrumb",
+  } %}
+{% endblock %}
+{% block page_content %}
+  {% include "@templates/placeholder/place-holder.twig" with {
+    "place_holder": "Primary Content",
+  } %}
+{% endblock %}
+{% block page_sidebar %}
+  {% include "@templates/placeholder/place-holder.twig" with {
+    "place_holder": "Secondary Content",
+  } %}
+{% endblock %}
+{% block page_content_bottom %}
+  {% include "@templates/placeholder/place-holder.twig" with {
+    "place_holder": "Content Bottom (Next Steps)",
+  } %}
+{% endblock %}
+{% block page_footer %}
+  {% include "@organisms/site/site-footer/site-footer.twig" %}
+{% endblock %}

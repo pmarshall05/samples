@@ -1,0 +1,84 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+.service, .condition, .treatment {
+	display: flex;
+	flex-direction: column;
+
+	&__details {
+		display: flex;
+		flex-direction: column;
+		margin-top: 40px;
+
+		nav, .text-long, .related-links, .icon-list, .testimonial, .featured-media, .text-cards, .related-media {
+			width: 100%;
+			@include wrapper;
+			margin-top: 80px;
+		}
+
+		.quick-links {
+			margin-top: 80px;
+		}
+
+	}
+
+}
+
+.service-teaser {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 24px;
+	flex: 1 0 0;
+	margin-top: 40px;
+
+	&__image {
+		height: 75%;
+
+		img {
+			object-fit: cover;
+    		height: 100%;
+		}
+	}
+}
+
+.service-search-result {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+
+	&__related {
+		display: flex;
+		gap: 12px;
+
+		.paragraph {
+			margin: 0;
+		}
+	}
+}
+
+.services-search-results {
+	background: clr(extended-accent-3);
+	padding-top: 80px;
+	padding-bottom: 80px;
+	margin-top: 80px;
+}
+
+.services-search-results-list {
+	@include wrapper;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.services-search-results-row {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	padding-bottom: 32px;
+	border-bottom: 2px solid clr(extended-accent-1);
+}
+

@@ -1,0 +1,7 @@
+ctek_demo_service.index:
+  path: '/services'
+  defaults:
+    _controller: '\Drupal\ctek_demo_service\Controller\CtekDemoServiceController::index'
+    _title: Services
+  requirements:
+    _permission: 'access content'

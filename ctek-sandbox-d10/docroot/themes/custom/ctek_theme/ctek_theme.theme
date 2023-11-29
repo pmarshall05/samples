@@ -1,0 +1,46 @@
+<?php
+
+use Drupal\pathauto\Entity\PathautoPattern;
+use Drupal\block_content\BlockContentInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\search_api\Query\Query;
+use Drupal\search_api\Query\Condition;
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+/**
+ * Implements hook_preprocess_menu()
+ */
+function ctek_theme_preprocess_links__language_block(&$variables) {
+	// Configured Languages
+ 	$languages = \Drupal::languageManager()->getLanguages();
+ 	$currentLanguage = \Drupal::languageManager()->getCurrentLanguage();
+
+ 	// Configured Language Selector Description
+ 	$ids = \Drupal::entityQuery('block_content')
+  	->condition('type', 'language_selector')
+  	->range(0,1)
+  	->accessCheck(FALSE)
+  	->execute();
+
+  	if (!empty($ids)) {
+  		foreach($ids as $key => $value) {
+ 			$custom_block = \Drupal::entityTypeManager()->getStorage('block_content')->load($value);
+			$fieldcontent = $custom_block->field_description->value;
+			$variables['languageSelectorDescription'] = $fieldcontent;
+		}
+	}
+	$variables['languages'] = $languages;
+	$variables['currentLanguage'] = $currentLanguage;
+}
+
+/**
+ * Implements hook_preprocess_html()
+ */
+function ctek_theme_preprocess_html(&$variables) {
+	$variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+}

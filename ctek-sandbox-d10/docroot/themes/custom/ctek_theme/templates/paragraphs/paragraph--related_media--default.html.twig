@@ -1,0 +1,57 @@
+{%
+  set related_media__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% if (content.field_related_media_items) %}
+  {% set media_items = [] %}
+  
+	{% for item in content.field_related_media_items['#items'] %}
+		
+		{% if (item.entity.field_media.entity.field_media_oembed_video[0].value) %}
+		  {% set embed_url = item.entity.field_media.entity.field_media_oembed_video[0].value %}
+
+		  {% if 'youtu.be' in embed_url %} 
+		    {% set embed_url = embed_url|replace({'youtu.be':'www.youtube.com/embed'}) %}
+		  {% endif %}
+
+		  {% set video_type = 'embed' %}
+		  {% set video_content = "<iframe title='Test Video' width='100%' height='100%' frameborder='0' allowfullscreen='allowfullscreen' src='" ~ embed_url ~ "?autoplay=0&amp;start=0'></iframe>" %}
+
+			{% set media_items = media_items|merge([{
+				'video_type': video_type,
+	    		'video_content': video_content,
+	    		'description': item.entity.field_description.value,
+				}]) 
+			%} 
+		{% elseif (item.entity.field_media.entity.field_media_video_file.entity.uri.value) %}
+		  {% set video_type = 'html5' %}
+		  {% set video_url = file_url(item.entity.field_media.entity.field_media_video_file.entity.uri.value) %}
+		  {% set media_items = media_items|merge([{
+				'video_type': video_type,
+	    		'video_urls': [video_url],
+	    		'description': item.entity.field_description.value,
+				}]) 
+			%}
+		{% else %}
+			{% set media_items = media_items|merge([{
+				'image_src': file_url(item.entity.field_media.entity.field_media_image.entity.fileuri),
+				'image_alt': item.entity.field_media['#items'].alt,
+	    	'description': item.entity.field_description.value,
+				}]) 
+			%}
+		{% endif %}
+	
+	{% endfor %}
+
+{% endif %}
+
+{% block related_media %}
+	{% include "@molecules/related-media/related-media.twig" with {
+	related_media_title: content.field_title['#items'][0].value,
+	related_media_items: media_items,
+  } %}
+{% endblock related_media %}

@@ -1,0 +1,7 @@
+card__heading: 'Title'
+card__body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+card__eyebrow: 'Eyebrow Text'
+card__link__text: 'Arrow Link'
+card__link__url: '#'
+card__button__content: 'Button'
+card__button__url: '#'

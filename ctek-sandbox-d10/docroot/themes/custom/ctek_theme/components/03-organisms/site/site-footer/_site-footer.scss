@@ -1,0 +1,98 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+.footer {
+  background-color: clr(primary);
+  display: flex;
+
+  &__inner {
+    padding: 24px 120px;
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__primary {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex-grow: 1;
+  }
+
+  &__logo-social {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    width: 180px;
+  }
+
+  &__social {
+    justify-content: flex-end;
+    margin: 0;
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+    color: clr(text-inverse);
+
+    .heading {
+      color: clr(text-inverse);
+      font-weight: 400;
+      font-variation-settings: 'wght' 400;
+
+      a {
+        color: clr(text-inverse);
+        font-weight: 400;
+        font-variation-settings: 'wght' 400;
+      }
+    }
+  }
+
+  &__bottom-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+  }
+
+  &__bottom-contact-links {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    font-weight: 400;
+    font-variation-settings: 'wght' 400;
+
+    a {
+      font-weight: 325;
+      font-variation-settings: 'wght' 325;
+    }
+  }
+
+  &__bottom-legal {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+
+    a {
+      font-weight: 325;
+      font-variation-settings: 'wght' 325;
+    }
+  }
+
+  &__bottom-copyright {
+    opacity: 0.6;
+  }
+  
+  hr {
+      border: 1px solid clr(accent);
+  }
+}

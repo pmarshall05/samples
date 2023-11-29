@@ -1,0 +1,57 @@
+{#
+/**
+ * Available variables:
+ * - language__selector_types - the types of users
+ * - language__selector_content - the content displayed in the selector (typically text)
+ * - language__selector_description - the description displayed in the selector (typically text)
+ */
+#}
+
+{% set selector__base_class = selector__base_class|default('language-selector') %}
+{% set selector__attributes = selector__attributes|default([]) %}
+
+{% set selector__attributes = selector__attributes|merge({
+  'class': bem(selector__base_class, selector__modifiers, selector__blockname, selector__additional_classes),
+}) %}
+
+<div {{ add_attributes(selector__attributes) }}>
+    <div {{ bem ('dropdown',[], selector__base_class) }}>
+      <div>{{ language__selector_content }}</div>
+      {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+          icon__name: 'angle-down',
+          icon__style: 'solid',
+        } %}
+    </div>
+
+    <div {{ bem ('modal',[], selector__base_class) }}>
+        <div {{ bem ('modal-close',[], selector__base_class) }}>
+            {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+                icon__name: 'xmark',
+                icon__style: 'solid',
+            } %}
+        </div>
+        <div {{ bem ('modal-header',[], selector__base_class) }}>
+            {% include "@atoms/text/text/08-subhead.twig" with {
+                subhead_content: language__selector_content,
+            } %}
+        </div>
+
+        {% include "@atoms/text/text/06-hr.twig" %}
+
+        <div {{ bem ('modal-content',[], selector__base_class) }}>
+            {% if currentLanguage %} {# Powered by Drupal #}
+                {{ language__selector_description | check_markup('basic_html') }}
+            {% else %} {# Powered by Storybook #}
+                {{ language__selector_description | raw }}
+            {% endif %}
+            <ul {{ bem ('modal-radios',[], selector__base_class) }}>
+                {% for type in language__selector_types %}
+                    {% include "@atoms/forms/radio/_radio-item.twig" with {
+                        radio_item: type.name,
+                        radio_data: {'name':'code','value':type.code},
+                    } %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

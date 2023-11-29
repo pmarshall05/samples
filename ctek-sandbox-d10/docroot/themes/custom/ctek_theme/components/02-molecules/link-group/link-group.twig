@@ -1,0 +1,64 @@
+{% set linkgroup__base_class = linkgroup__base_class|default('linkgroup') %}
+{% set linkgroup__attributes = linkgroup__attributes|default([]) %}
+
+{% if ((content is defined) and (linkgroup_items == null)) %} 
+	{% set linkgroup__modifiers = [content.field_linkgroup_type['#items'][0].value] %}
+{% endif %}	
+
+{% set linkgroup__attributes = linkgroup__attributes|merge({
+  'class': bem(linkgroup__base_class, linkgroup__modifiers, linkgroup__blockname, linkgroup__additional_classes),
+}) %}
+
+<div {{ add_attributes(linkgroup__attributes) }}>
+		{% if ((content is defined) and (linkgroup_items == null)) %} {# Powered by Drupal #}
+
+			{% for item in content.field_linkgroup_items['#items'] %}
+				{% set link_modifiers = [ 'icon' ] %}
+				{% if (item.entity.field_icon_color.value is defined) %}
+					{% set link_modifiers = [ 'icon' , 'icon-color-' ~ item.entity.field_icon_color.value ] %}
+				{% endif %}
+
+				{% if 'inverse' in linkgroup__modifiers %} 
+					{% set link_modifiers = link_modifiers|merge(['inverse']) %}
+				{% endif %}
+
+				{% set style = 'solid' %}
+				{% if (item.entity.field_icon[0].style == 'far') %}
+					{% set style = 'regular' %}
+				{% endif %}
+
+				{% include "@atoms/links/link/link.twig" with {
+					link_url: item.entity.field_url.url,
+					link_content: item.entity.field_url.title,
+					link_type: 'icon',
+					link_icon: item.entity.field_icon[0].icon_name,
+					link_icon_position: item.entity.field_icon_position.value,
+					link_icon_style: style,
+		    } %}
+
+	    {% endfor %}
+		{% else %} {# Powered by Storybook #}
+
+			
+			{% for item in linkgroup_items %}
+				{% set link_modifiers = [ item.type] %}
+				{% if item.icon_color %}
+					{% set link_modifiers = [ item.type] | merge(['icon-color-' ~ item.icon_color]) %}
+				{% endif %}
+
+				{% if 'inverse' in linkgroup__modifiers %} 
+					{% set link_modifiers = link_modifiers|merge(['inverse']) %}
+				{% endif %}
+				
+				{% include "@atoms/links/link/link.twig" with {
+					link_url: item.url,
+					link_content: item.title,
+					link_type: item.type,
+					link_icon: item.icon,
+					link_icon_position: item.icon_position,
+					link_icon_style: item.icon_style,
+		        } %}
+	    {% endfor %}
+     {% endif %}
+	
+</div>	

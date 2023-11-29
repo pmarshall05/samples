@@ -1,0 +1,11 @@
+{% set heroctas__base_class = heroctas__base_class|default('hero-ctas') %}
+{% set heroctas__attributes = heroctas__attributes|default([]) %}
+
+{% set heroctas__attributes = heroctas__attributes|merge({
+  'class': bem(heroctas__base_class, heroctas__modifiers, heroctas__blockname, heroctas__additional_classes),
+}) %}
+
+
+<div {{ add_attributes(heroctas__attributes) }}>
+	{% include "@molecules/link-group/link-group.twig" %}
+</div>

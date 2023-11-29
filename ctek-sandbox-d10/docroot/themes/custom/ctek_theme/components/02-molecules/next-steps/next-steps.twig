@@ -1,0 +1,45 @@
+{% set next_steps__base_class = next_steps__base_class|default('next-steps') %}
+{% set next_steps__attributes = next_steps__attributes|default([]) %}
+
+{% set next_steps__attributes = next_steps__attributes|merge({
+    'class': bem(next_steps__base_class, next_steps__modifiers, next_steps__blockname, next_steps__additional_classes),
+  }) %}
+
+<section {{ add_attributes(next_steps__attributes) }}>
+	<div {{ bem ('inner',[], next_steps__base_class) }}>
+		<div {{ bem ('content',[], next_steps__base_class) }}>
+			{% if next_steps_eyebrow %}
+				{% include "@atoms/text/text/09-eyebrow.twig" with {
+	            	eyebrow_content: next_steps_eyebrow,
+	        	} %}
+        	{% endif %}
+
+        	{% if next_steps_title %}
+				{% include "@atoms/text/headings/_heading.twig" with {
+	            	heading_level: 2,
+	            	heading: next_steps_title,
+	        	} %}
+	        {% endif %}
+
+	        {% if next_steps_description %}
+				{% include "@atoms/text/text/01-paragraph.twig" with {
+	                paragraph_content: next_steps_description,
+	                paragraph_modifiers: ['large'],
+	            } %}
+	        {% endif %}
+        </div>
+
+  		<div {{ bem ('buttons',[], next_steps__base_class) }}>
+  			{% for button in next_steps_buttons %}
+  				{% include "@atoms/buttons/button.twig" with {
+		  			button__content: button.label,
+		  			button__modifiers: [button.type],
+		  			button_url: button.url,
+		  			button_icon: button.icon,
+					button_icon_position: button.icon_position,
+					button_icon_style: button.icon_style,
+		  		}%}
+	  		{% endfor %}
+ 		</div>
+	</div>
+</section>

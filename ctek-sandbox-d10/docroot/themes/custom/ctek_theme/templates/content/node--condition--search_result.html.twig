@@ -1,0 +1,9 @@
+{% embed "@pages/content-types/service/service-search-result.twig" with {
+  service_search_result__additional_classes: '',
+  service_search_result_heading: label,
+  service_search_result_link_url: url,
+  service_search_result_summary: content.field_search_summary['#items'][0].value,
+  service_search_result_image_src: file_url(content.field_service_hero[0]['#paragraph'].field_image.entity.uri.value),
+  service_search_result_image_alt: content.field_service_hero[0]['#paragraph'].field_image.entity.alt,
+} %}
+{% endembed %}

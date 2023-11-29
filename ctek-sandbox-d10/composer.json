@@ -1,0 +1,156 @@
+{
+    "name": "drupal/recommended-project",
+    "description": "Project template for Drupal projects with a relocated document root",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/drupal",
+    "support": {
+        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
+        "chat": "https://www.drupal.org/node/314178"
+    },
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "pipeline": {
+            "type": "vcs",
+            "url": "git@bitbucket.org:centretek/pipeline.git"
+        }
+    },
+    "require": {
+        "centretek/pipeline": "^1.0",
+        "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/address": "^1.12",
+        "drupal/auto_block_translate": "^1.0@alpha",
+        "drupal/auto_node_translate": "^2.1",
+        "drupal/auto_term_translate": "^1.0",
+        "drupal/block_content_template": "^1.5",
+        "drupal/components": "^3.0@beta",
+        "drupal/config_pages": "^2.15",
+        "drupal/core-composer-scaffold": "^10.0",
+        "drupal/core-project-message": "^10.0",
+        "drupal/core-recommended": "^10.0",
+        "drupal/datalayer": "^2.0",
+        "drupal/easy_breadcrumb": "^2.0",
+        "drupal/emulsify_twig": "^4.0",
+        "drupal/fieldblock": "^2.2",
+        "drupal/fontawesome": "^2.26",
+        "drupal/fontawesome_iconpicker_widget": "^2.26",
+        "drupal/geocoder": "^4.9",
+        "drupal/geofield": "^1.54",
+        "drupal/google_tag": "^2.0",
+        "drupal/honeypot": "^2.1",
+        "drupal/menu_item_extras": "^3.0",
+        "drupal/metatag": "^2.0",
+        "drupal/office_hours": "^1.11",
+        "drupal/paragraph_blocks": "^3.1",
+        "drupal/paragraphs": "^1.15",
+        "drupal/pathauto": "^1.11",
+        "drupal/piwik_pro": "^1.0",
+        "drupal/redirect": "^1.9",
+        "drupal/schema_metatag": "^3.0",
+        "drupal/search_api": "^1.29",
+        "drupal/search_api_location": "^1.0@alpha",
+        "drupal/search_api_page": "^1.0",
+        "drupal/search_api_solr": "^4.2",
+        "drupal/search_api_solr_autocomplete": "^4.2",
+        "drupal/seckit": "^2.0",
+        "drupal/security_review": "^2.0",
+        "drupal/simple_sitemap": "^4.1",
+        "drupal/twig_field_value": "^2.0",
+        "drupal/twig_tweak": "^3.2",
+        "drupal/webform": "^6.1",
+        "drush/drush": "^12.1",
+        "platformsh/config-reader": "^2.4"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^10.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "centretek/pipeline": true,
+            "cweagans/composer-patches": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "patches": {
+            "drupal/pathauto": {
+                "Pathauto AliasCleaner deprecation error fix": "https://www.drupal.org/files/issues/2022-12-21/php8.2notice-pathauto-3328670.patch"
+            }
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "docroot/"
+            }
+        },
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "docroot/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "docroot/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "docroot/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
+        },
+        "drupal-core-project-message": {
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Congratulations, youâ€™ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+                "  * Install the site: https://www.drupal.org/docs/installing-drupal",
+                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+                "  * Get support: https://www.drupal.org/support",
+                "  * Get involved with the Drupal community:",
+                "      https://www.drupal.org/getting-involved",
+                "  * Remove the plugin that prints this message:",
+                "      composer remove drupal/core-project-message"
+            ]
+        }
+    },
+    "scripts": {
+        "deploy": [ 
+            "Composer\\Config::disableProcessTimeout",
+            " vendor/bin/ctek-pipeline.sh deploy acquia" 
+        ]
+    }
+}

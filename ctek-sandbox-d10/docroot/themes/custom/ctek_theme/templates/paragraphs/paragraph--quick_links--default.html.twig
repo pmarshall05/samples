@@ -1,0 +1,40 @@
+{%
+  set quick_links__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% if (content.field_quick_link_items) %}
+	{% set list_items = [] %}
+	{% set itemUrl = '' %}
+	
+	{% for item in content.field_quick_link_items['#items'] %}
+		{% if item.entity.field_url[0].url.external %}
+			{% set itemUrl = item.entity.field_url[0].uri %}
+		{% else %}
+			{% set itemUrl = item.entity.field_url[0].uri|replace({'internal:':''}) %}
+		{% endif %}
+
+		{% set list_items = list_items|merge([{
+			'title': item.entity.field_url[0].title,
+			'url': itemUrl,
+    		'description': item.entity.field_description.value,
+			}]) 
+		%}
+	{% endfor %}
+
+	{% if content.field_background['#items'][0].value == 1 %} 
+		{% set quick_links__modifiers = ['accent'] %}
+	{% endif %}
+{% endif %}
+
+{% block quick_links %}
+	{% include "@molecules/quick-links/quick-links.twig" with {
+    quick_links_eyebrow: content.field_eyebrow['#items'][0].value,
+    quick_links_title: content.field_title['#items'][0].value,
+    quick_links_description: content.field_description['#items'][0].value,
+    quick_links_items: list_items,
+  } %}
+{% endblock quick_links %}

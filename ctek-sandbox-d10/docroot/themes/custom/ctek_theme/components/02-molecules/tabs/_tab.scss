@@ -1,0 +1,16 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+.tabs {
+  &__link {
+    border-bottom: 0px;
+    
+    &.is-active {
+      color: clr(primary);
+      border-bottom: solid 4px clr(secondary);
+    }
+  }
+}
+  

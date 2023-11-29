@@ -1,0 +1,18 @@
+linkgroup_items:
+  - title: 'Inline Link'
+    url: '#'
+    type: 'arrow'
+  - title: 'Inline Link'
+    url: '#'
+    type: 'arrow'
+  - title: 'Inline Link'
+    url: '#'
+    type: 'arrow'
+  - title: 'Inline Link'
+    url: '#'
+    type: 'arrow'
+  - title: 'Inline Link'
+    url: '#'
+    type: 'arrow'
+linkgroup__modifiers:
+  - 'row'

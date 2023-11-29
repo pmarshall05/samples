@@ -1,0 +1,52 @@
+{# Set classes #}
+{% set utility_menu__base_class = utility_menu__base_class|default('utility-menu') %}
+{% set utility_menu__attributes = utility_menu__attributes|default([]) %}
+
+{% set utility_menu__attributes = utility_menu__attributes|merge({
+    'class': bem(utility_menu__base_class, utility_menu__modifiers, utility_menu__blockname, utility_menu__additional_classes),
+  }) %}
+
+{% set menu_class = utility_menu__base_class %}
+
+<div {{ add_attributes(utility_menu__attributes) }} role="navigation" aria-label="utility navigation">
+    {% if (utility_location == true) %}
+   <div {{ bem ('location',[], utility_menu__base_class) }}>
+      {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+        icon__name: 'location-dot',
+        icon__style: 'solid',
+      } %}
+      <div {{ bem ('location-result',[], utility_menu__base_class) }}>
+        Chicago, IL 60601
+      </div>
+      <div {{ bem ('location-result-icon',[], utility_menu__base_class) }} id="toggle-location">
+        {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+          icon__name: 'angle-down',
+          icon__style: 'solid',
+        } %}
+      </div>
+    </div>
+    {% endif %}
+    <ul>
+      {% for item in utility_menu_items %}  
+        {% include "@molecules/menus/utility-menu/_utility-menu-item.twig" %}
+      {% endfor %}
+    </ul>
+    {% if (utility_search == true) %}
+    <div {{ bem ('search',[], utility_menu__base_class) }}>
+      {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+        icon__name: 'magnifying-glass',
+        icon__style: 'solid',
+      } %}
+    </div>
+    {% endif %}
+  </div>
+  <div id="current-location-form" style="display:none">
+    {% include "@atoms/forms/textfields/input.twig" with {
+          input_label: 'Update your location by entering your city and state or zip code below.',
+          input_placeholder: 'City, State or Zip Code',
+    } %}
+    {% include "@atoms/buttons/button.twig" with {
+          button__content: 'Update Location',
+          button__modifiers: button_modifiers,
+    } %}
+</div>

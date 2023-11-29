@@ -1,0 +1,173 @@
+{% set condition__base_class = condition__base_class|default('condition') %}
+{% set condition__attributes = condition__attributes|default([]) %}
+
+{% set condition__attributes = condition__attributes|merge({
+'class': bem(condition__base_class, condition__modifiers, condition__blockname, condition__additional_classes),
+}) %}
+
+<div {{ add_attributes(condition__attributes) }}>
+	{% include "@organisms/hero/service/service.twig" with {
+		service_image_src: condition_image_src,
+		service_image_alt: condition_image_alt,
+		service_image_title: condition_image_title,
+		service_subhead: condition_subhead,
+		service_title: condition_title,
+	} %}
+ 	{% if linkgroup_items %}
+		{% block hero_ctas %}
+			{% include "@molecules/hero-ctas/hero-ctas.twig" %}
+		{% endblock hero_ctas %}
+	{% endif %}
+
+    <div {{ bem ('details',[], condition__base_class) }}>
+    	{% if (breadcrumb == null) %} {# Populated by Drupal #}
+			{{ drupal_breadcrumb() }}
+		{% else %} {# Populated by Storybook #}
+			{% include "@molecules/menus/breadcrumbs/breadcrumbs.twig" %}
+		{% endif %}
+
+		{% if condition_featured_media %} 
+			{% if (condition_featured_media.field_video.entity.field_media_oembed_video[0].value) %}
+				{% set embed_url = condition_featured_media.field_video.entity.field_media_oembed_video[0].value %}
+
+				{% if 'youtu.be' in embed_url %} 
+					{% set embed_url = embed_url|replace({'youtu.be':'www.youtube.com/embed'}) %}
+				{% endif %}
+
+				{% set video_type = 'embed' %}
+				{% set video_content = "<iframe title='Test Video' width='854' height='480' frameborder='0' allowfullscreen='allowfullscreen' src='" ~ embed_url ~ "?autoplay=0&amp;start=0'></iframe>" %}
+			{% elseif (condition_featured_media.field_video.entity.field_media_video_file.entity.uri.value) %}
+				{% set video_type = 'html5' %}
+				{% set video_url = file_url(condition_featured_media.field_video.entity.field_media_video_file.entity.uri.value) %}
+			{% endif %}
+			
+			
+			{% block featured_media %}
+				{% include "@molecules/featured-media/featured-media.twig" with {
+			    featured_media_title: condition_featured_media.field_title.value,
+			    featured_media_description: condition_featured_media.field_description.value,
+			    featured_media_position: condition_featured_media.field_featured_media_position.value,
+			    featured_media_image_src: file_url(condition_featured_media.field_image['#items'].entity.uri.value),
+			    featured_media_image_alt: condition_featured_media.field_image['#items'].alt,
+			    featured_media_video_type: video_type,
+			    featured_media_video_content: video_content,
+			    featured_media_video_urls: [video_url],
+			  } %}
+			{% endblock featured_media %} 
+		
+		{% endif %}
+
+		{% if condition_body %}  
+			<section {{ bem ('body',[], condition__base_class,['text-long']) }}>
+				{{condition_body | raw }}
+			</section>
+		{% endif %}
+
+		{% if condition_text_cards %}  
+			
+			{% if (condition_text_cards.field_text_card_items) %}
+				{% set list_items = [] %}
+
+				{% for item in condition_text_cards.field_text_card_items %}
+
+					{% set list_items = list_items|merge([{
+						'title': item.entity.field_title.value,
+			    		'description': item.entity.field_description.value,
+						}]) 
+					%}
+				{% endfor %}
+			{% endif %}
+
+
+			{% block text_cards %}
+				{% include "@molecules/text-cards/text-cards.twig" with {
+			    text_cards_eyebrow: condition_text_cards.field_eyebrow.value,
+			    text_cards_title: condition_text_cards.field_title.value,
+			    text_cards_description: condition_text_cards.field_description.value,
+			    text_cards_items: list_items,
+			  } %}
+			{% endblock text_cards %}
+		{% elseif text_cards_items %} {# Powered by Storybook #}
+			{% include "@molecules/text-cards/text-cards.twig" %}
+		{% endif %}
+
+		{% if condition_diagnosis %}  
+			<section {{ bem ('diagnosis',[], condition__base_class,['text-long']) }}>
+				{{condition_diagnosis | raw }}
+			</section>
+		{% endif %}
+
+		{% if condition_treatment %}  
+			<section {{ bem ('treatment',[], condition__base_class,['text-long']) }}>
+				{{condition_treatment | raw }}
+			</section>
+		{% endif %}
+		
+
+		{% if condition_testimonial %}
+			{% set itemUrl = '' %}
+
+			{% if condition_testimonial.field_url[0].url.external %}
+				{% set itemUrl = condition_testimonial.field_url[0].uri %}
+			{% else %}
+				{% set itemUrl = condition_testimonial.field_url[0].uri|replace({'internal:':''}) %}
+			{% endif %}
+
+			{% block testimonial %}
+				{% include "@molecules/testimonial/testimonial.twig" with {
+			    testimonial_person: condition_testimonial.field_testimonial_full_name.value,
+			    testimonial_person_title: condition_testimonial.field_testimonial_user_title.value,
+			    testimonial_content: condition_testimonial.field_description.value,
+			    testimonial_image_src: file_url(condition_testimonial.field_image[0].entity.uri.value),
+			    testimonial_image_alt: condition_testimonial.field_image[0].alt,
+			    testimonial_image_title: condition_testimonial.field_image[0].title,
+			    testimonial_link_url: itemUrl,
+			    testimonial_link_title: condition_testimonial.field_url[0].title,
+			  } %}
+			{% endblock testimonial %}
+		{% elseif testimonial_content %} {# Powered by Storybook #}
+			{% include "@molecules/testimonial/testimonial.twig" %}
+		{% endif %}
+
+		{% if condition_why_choose %}  
+			{% set link_items = [] %}
+			{% set list_items = [] %}
+			{% set itemUrl = '' %}
+
+			{% for item in condition_why_choose.field_icon_list_items %}
+				{% set style = 'solid' %}
+				{% if (item.entity.field_icon[0].style == 'far') %}
+					{% set style = 'regular' %}
+				{% endif %}
+
+				{% if item.entity.field_url[0].url.external %}
+					{% set itemUrl = item.entity.field_url[0].uri %}
+				{% else %}
+					{% set itemUrl = item.entity.field_url[0].uri|replace({'internal:':''}) %}
+				{% endif %}
+
+				{% set list_items = list_items|merge([{
+					'icon': item.entity.field_icon[0].icon_name,
+		    		'icon_color': item.entity.field_icon_color.value,
+		    		'icon_style': style,
+		    		'title': item.entity.field_title.value,
+		    		'url': itemUrl,
+		    		'description': item.entity.field_description.value,
+					}]) 
+				%}
+			{% endfor %}
+
+			{% block icon_list %}
+				{% set description = condition_why_choose.field_description|raw %}
+			  	{% include "@molecules/icon-list/icon-list.twig" with {
+				    icon_list_eyebrow: condition_why_choose.field_eyebrow.value,
+				    icon_list_title: condition_why_choose.field_title.value,
+				    icon_list_description: condition_why_choose.field_description.value,
+				    icon_list_items: list_items,
+			  	} %}
+			{% endblock icon_list %}
+		{% elseif icon_list_items %} {# Powered by Storybook #}
+			{% include "@molecules/icon-list/icon-list.twig" %}
+		{% endif %}
+		</div>
+</div>

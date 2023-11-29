@@ -1,0 +1,8 @@
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+
+.form-item--checkboxes,
+.form-item--checkbox__item {
+  @include list-reset;
+}

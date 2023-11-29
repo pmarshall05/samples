@@ -1,0 +1,5 @@
+# .htaccess.prepend
+
+RewriteEngine On
+RewriteRule ^autodiscover/autodiscover.xml - [R=403,NC,L]
+

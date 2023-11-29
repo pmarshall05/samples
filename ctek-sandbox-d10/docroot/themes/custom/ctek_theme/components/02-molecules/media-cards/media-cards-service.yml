@@ -1,0 +1,24 @@
+media_cards_eyebrow: 'Optional Eyebrow Text'
+media_cards_title: 'Media Cards Title'
+media_cards_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+media_card_items:
+  - content_type: 'service'
+    title: 'Cancer Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+  - content_type: 'service'
+    title: 'Pediatric Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+  - content_type: 'program'
+    title: 'Primary Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+  - content_type: 'service'
+    title: 'Pediatric Care'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"

@@ -1,0 +1,100 @@
+{#
+/**
+ * Available variables:
+ * - usertype__selector_types - the types of users
+ * - usertype__selector_content - the content displayed in the selector (typically text)
+ * - usertype__selector_description - the description displayed in the selector (typically text)
+ */
+#}
+
+{% set usertype__selector_base_class = selector__base_class|default('user-type-selector') %}
+{% set usertype__selector_attributes = selector__attributes|default([]) %}
+
+{% set usertype__selector_attributes = usertype__selector_attributes|merge({
+  'class': bem(usertype__selector_base_class, usertype__selector_modifiers, usertype__selector_blockname, usertype__selector_additional_classes),
+}) %}
+
+{% set subhead = usertype__selector_content ~ " . . ." %}
+
+<div {{ add_attributes(usertype__selector_attributes) }}>
+	<div {{ bem ('dropdown',[], usertype__selector_base_class) }}>
+	  <div>{{ usertype__selector_content }}</div>
+	  {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+	      icon__name: 'angle-down',
+	      icon__style: 'solid',
+	    } %}
+	</div>
+
+	<div {{ bem ('modal',[], usertype__selector_base_class) }}>
+		<div {{ bem ('modal-close',[], usertype__selector_base_class) }}>
+			{% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+	      		icon__name: 'xmark',
+	      		icon__style: 'solid',
+	    	} %}
+		</div>
+		<div {{ bem ('modal-header',[], usertype__selector_base_class) }}>
+			{% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+	      		icon__name: 'user',
+	      		icon__style: 'regular',
+	    	} %}
+	    	{% include "@atoms/text/text/08-subhead.twig" with {
+	      		subhead_content: subhead,
+	    	} %}
+		</div>
+
+		{% include "@atoms/text/text/06-hr.twig" %}
+
+		<div {{ bem ('modal-content',[], usertype__selector_base_class) }}>
+		    {% include "@atoms/text/text/01-paragraph.twig" with {
+	      		paragraph_content: usertype__selector_description,
+	    	} %}
+	    	<ul {{ bem ('modal-radios',[], usertype__selector_base_class) }}>
+	    	{% for type in usertype__selector_types %}
+	      		{% include "@atoms/forms/radio/_radio-item.twig" with {
+	      			radio_item: type.name,
+	      		} %}
+	    	{% endfor %}
+	  		</ul>
+	  		<div {{ bem ('modal-links',[], usertype__selector_base_class) }}>
+		  		{% for type in usertype__selector_types %}
+		  			<div {{ bem ('modal-link-group',[], usertype__selector_base_class) }} data-type="{{ type.name }}">
+			  			{% set links = type.links %}
+			  			{% for link in links %}
+			  				<div>
+			  				{% if (link.type == 'external') %}
+              		{% include "@atoms/links/link/link.twig" with {
+                		link_url: link.url,
+                		link_content: link.name,
+                		link_type: 'arrow-external',
+                		link_modifiers: ["arrow"],
+              		} %}
+            		{% else %}
+              		{% include "@atoms/links/link/link.twig" with {
+                		link_url: link.url,
+                		link_content: link.name,
+                		link_type: 'arrow',
+                		link_modifiers: ["arrow","hide-icon"],
+              		} %}
+            {% endif %}
+	      					</div>
+			      		{% endfor %}
+		      		</div>
+		    	{% endfor %}
+	  		</div>
+		</div>
+
+		{% include "@atoms/text/text/06-hr.twig" %}
+
+		<div {{ bem ('modal-footer',[], usertype__selector_base_class) }}>
+			<div {{ bem ('modal-footer-select',[], usertype__selector_base_class) }}>
+				{% include "@atoms/links/link/link.twig" with {
+				link_url: link.url,
+				link_content: 'Select New User Type',
+				link_type: 'arrow',
+				link_modifiers: ["arrow"],
+				} %}
+			</div>
+		</div>
+
+	</div>
+</div>

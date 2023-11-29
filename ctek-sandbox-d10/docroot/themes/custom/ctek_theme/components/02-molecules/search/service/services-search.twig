@@ -1,0 +1,63 @@
+{% set services_search__base_class = services_search__base_class|default('services-search') %}
+{% set services_search__attributes = services_search__attributes|default([]) %}
+
+{% set services_search__attributes = services_search__attributes|merge({
+    'class': bem(services_search__base_class, services_search__modifiers, services_search__blockname, services_search__additional_classes),
+  }) %}
+
+{% set form_background = [] %}
+
+  <section {{ add_attributes(services_search__attributes) }}>
+	<div {{ bem ('inner',[], services_search__base_class) }}>
+		<div {{ bem ('content',[], services_search__base_class) }}>
+			{% if services_search_title %}
+				{% include "@atoms/text/headings/_heading.twig" with {
+	            	heading_level: 2,
+	            	heading: services_search_title,
+	        	} %}
+	        {% endif %}
+
+	        {% if services_search_description %}
+				{% include "@atoms/text/text/01-paragraph.twig" with {
+	                paragraph_content: services_search_description,
+	                paragraph_modifiers: ['large'],
+	            } %}
+	        {% endif %}
+        </div>
+
+      {% if services_search_form_background %}
+        	{% set form_background = [services_search_form_background] %}
+      {% endif %}
+      
+      {% if form %}
+      	<div {{ bem ('form', form_background, services_search__base_class) }}>
+      {% else %}
+      <form id="services-search-form" {{ bem ('form',form_background, services_search__base_class) }} action="{{ services_search_action ? services_search_action : '' }}">
+      {% endif %}
+  		
+  			<div {{ bem ('form-input',[], services_search__base_class) }}>
+  				{% include "@atoms/forms/textfields/input.twig" with {
+		  			input_placeholder: services_search_input_placeholder,
+						input_icon: services_search_input_icon,
+						input_name: services_search_input_name,
+						input_id: services_search_input_name,
+						input_value: services_search_input_value,
+		  		}%}
+		  	</div>
+		  	<div {{ bem ('form-button',[], services_search__base_class) }}>
+  				{% include "@atoms/buttons/button.twig" with {
+		  			button__content: services_search_button.label,
+		  			button__modifiers: [services_search_button.type],
+		  			button_url: services_search_button.url,
+		  			button_icon: services_search_button.icon,
+						button_icon_position: services_search_button.icon_position,
+						button_icon_style: services_search_button.icon_style,
+		  		}%}
+		  	</div>
+    {% if form %}
+    </div>
+    {% else %}
+ 		</form>
+ 	{% endif %}
+	</div>
+</section>

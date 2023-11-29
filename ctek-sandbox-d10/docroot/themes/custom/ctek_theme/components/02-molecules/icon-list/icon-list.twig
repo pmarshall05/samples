@@ -1,0 +1,51 @@
+{% set icon_list__base_class = icon_list__base_class|default('icon-list') %}
+{% set icon_list__attributes = icon_list__attributes|default([]) %}
+
+{% set icon_list__attributes = icon_list__attributes|merge({
+    'class': bem(icon_list__base_class, icon_list__modifiers, icon_list__blockname, icon_list__additional_classes),
+  }) %}
+
+<section {{ add_attributes(icon_list__attributes) }}>
+	<div {{ bem ('content',[], icon_list__base_class) }}>
+	{% if icon_list_eyebrow %}
+		{% include "@atoms/text/text/09-eyebrow.twig" with {
+          eyebrow_content: icon_list_eyebrow,
+        } %}
+	{% endif %}
+  	{% if icon_list_title %}
+	  	{% include "@atoms/text/headings/_heading.twig" with {
+	          heading_level: 2,
+	          heading: icon_list_title,
+	    } %}
+	{% endif %}
+	{% if icon_list_description %}
+		{% include "@atoms/text/text/01-paragraph.twig" with {
+          paragraph_content: icon_list_description,
+          paragraph_modifiers: ['large'],
+        } %}
+	{% endif %}
+  </div>
+  <div {{ bem ('items',[], icon_list__base_class) }}>
+  	{% for item in icon_list_items %}
+  		<div {{ bem ('item',[], icon_list__base_class) }}>
+  			<div {{ bem ('item-icon',[ item.icon_color ], icon_list__base_class) }}>
+  				{% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+    				icon__name: item.icon,
+    				icon__style: item.icon_style,
+  				} %}
+  			</div>
+  			<div {{ bem ('item-content',[], icon_list__base_class) }}>
+  				{% include "@atoms/text/headings/_heading.twig" with {
+	          		heading_level: 3,
+	          		heading: item.title,
+	          		heading_url: item.url,
+	    		} %}
+	    		{% include "@atoms/text/text/01-paragraph.twig" with {
+	          		paragraph_content: item.description,
+	    		} %}
+  			</div>
+
+  		</div>
+  	{% endfor %}
+  </div>
+</section>

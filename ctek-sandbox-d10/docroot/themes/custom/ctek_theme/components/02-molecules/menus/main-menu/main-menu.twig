@@ -1,0 +1,21 @@
+{% set main_menu__base_class = main_menu__base_class|default('main-menu') %}
+{% set main_menu__attributes = main_menu__attributes|default([]) %}
+
+{% set main_menu__attributes = main_menu__attributes|merge({
+    'class': bem(main_menu__base_class, main_menu__modifiers, main_menu__blockname, main_menu__additional_classes),
+  }) %}
+
+<nav {{ add_attributes(main_menu__attributes) }}>
+  <div {{ bem('items', [], main_menu__base_class) }}>
+    {% for item in menu_items %}
+      <div {{ bem('item', [], main_menu__base_class) }}>
+        {% include "@molecules/menus/main-menu/_main-menu-link.twig" %}
+
+        {% include "@molecules/menus/main-menu/_submenu.twig" with {
+          title: item.title,
+          submenu: item.submenu,
+        }%}
+      </div>
+    {% endfor %}
+  </div>
+</nav>

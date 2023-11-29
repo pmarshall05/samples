@@ -1,0 +1,45 @@
+{% set service_search_result__base_class = service_search_result__base_class|default('service-search-result') %}
+{% set service_search_result__attributes = service_search_result__attributes|default([]) %}
+
+{% set service_search_result__attributes = service_search_result__attributes|merge({
+'class': bem(service_search_result__base_class, service_search_result__modifiers, service_search_result__blockname, service_search_result__additional_classes),
+}) %}
+
+<div {{ add_attributes(service_search_result__attributes) }}>
+	<div {{ bem ('content',[], service_search_result__base_class) }}>
+		
+		{% include "@atoms/text/headings/_heading.twig" with {
+            	heading_level: 4,
+            	heading: service_search_result_heading,
+            	heading_url: service_search_result_link_url,
+        } %}
+
+        {% include "@atoms/text/text/01-paragraph.twig" with {
+                paragraph_content: service_search_result_summary,
+        } %}
+
+        {% include "@atoms/links/link/link.twig" with {
+            link_url: '/doctors',
+			link_content: 'Find a Doctor',
+			link_type: 'arrow',
+			link_modifiers: ['arrow'],
+        } %}
+    </div>
+
+    {% if service_search_result_related_items %}
+        <div {{ bem ('related',[], service_search_result__base_class) }}>
+            {% include "@atoms/text/text/01-paragraph.twig" with {
+                paragraph_content: 'Related Services: ',
+                paragraph_modifiers: ['small'],
+            } %}
+
+            {% for item in service_search_result_related_items %}
+                {% include "@atoms/links/link/link.twig" with {
+                    link_url: item.url,
+                    link_content: item.name,
+                    link_modifiers: ['small'],
+                } %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

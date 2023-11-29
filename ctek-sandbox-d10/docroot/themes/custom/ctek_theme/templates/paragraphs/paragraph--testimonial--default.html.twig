@@ -1,0 +1,17 @@
+{%
+  set testimonial__additional_classes = [
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block testimonial %}
+	{% include "@molecules/testimonial/testimonial.twig" with {
+    testimonial_person: content.field_testimonial_full_name['#items'][0].value,
+    testimonial_person_title: content.field_testimonial_user_title['#items'][0].value,
+    testimonial_content: content.field_description['#items'][0].value,
+    testimonial_image_src: file_url(content.field_image['#items'].entity.uri.value),
+    testimonial_image_alt: content.field_image['#items'].alt,
+    testimonial_image_title: content.field_image['#items'].title,
+  } %}
+{% endblock testimonial %}

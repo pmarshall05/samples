@@ -1,0 +1,23 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+.featured-media {
+	display: flex;
+	padding-right: 0px;
+	align-items: center;
+	gap: 48px;
+
+	&__content {
+		width: 50%;
+
+		.heading {
+			color: clr(primary);
+		}
+	}
+
+	&__media {
+		width: 50%;
+	}
+}

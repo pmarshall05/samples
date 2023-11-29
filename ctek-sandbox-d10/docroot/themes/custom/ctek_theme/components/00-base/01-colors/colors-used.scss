@@ -1,0 +1,115 @@
+@use 'colors-vars';
+
+// Color Usage variables - use these (via the `clr` function below)
+// rather than color variables directly.
+$defaultColors: (
+  text: colors-vars.$black,
+  text-inverse: colors-vars.$white,
+  primary: colors-vars.$dark-blue,
+  secondary: colors-vars.$lime,
+  accent: colors-vars.$medium-blue,
+  extended-accent-1: colors-vars.$slate,
+  extended-accent-2: colors-vars.$ocean,
+  extended-accent-3: colors-vars.$air,
+  extended-accent-4: colors-vars.$light-green,
+  extended-accent-5: colors-vars.$light-blue,
+  neutral-white: colors-vars.$white,
+  neutral-black: colors-vars.$black,
+  neutral-black-2: colors-vars.$black2,
+  neutral-gray-1: colors-vars.$light-gray,
+  neutral-gray-2: colors-vars.$mid-gray,
+  neutral-gray-3: colors-vars.$charcoal,
+  muted: colors-vars.$slate,
+  success: colors-vars.$success,
+  error: colors-vars.$error,
+  warning: colors-vars.$warning,
+  info: colors-vars.$info,
+  star-rating: colors-vars.$star-rating,
+);
+
+$darkColors: (
+  text: colors-vars.$black,
+  text-inverse: colors-vars.$white,
+  primary: colors-vars.$dark-blue,
+  secondary: colors-vars.$lime,
+  accent: colors-vars.$medium-blue,
+  extended-accent-1: colors-vars.$slate,
+  extended-accent-2: colors-vars.$ocean,
+  extended-accent-3: colors-vars.$air,
+  extended-accent-4: colors-vars.$light-green,
+  extended-accent-5: colors-vars.$light-blue,
+  neutral-white: colors-vars.$white,
+  neutral-black: colors-vars.$black,
+  neutral-black-2: colors-vars.$black2,
+  neutral-gray-1: colors-vars.$light-gray,
+  neutral-gray-2: colors-vars.$mid-gray,
+  neutral-gray-3: colors-vars.$charcoal,
+  muted: colors-vars.$slate,
+  success: colors-vars.$success,
+  error: colors-vars.$error,
+  warning: colors-vars.$warning,
+  info: colors-vars.$info,
+  star-rating: colors-vars.$star-rating,
+);
+
+///////////
+// Usage //
+///////////
+// This color function makes it easy for you to call a color by it's functional
+// name anywhere you need.
+// E.g. to use the `text` color, you type: `color: clr(text);`
+//
+// How it works:
+// This function works in conjunction with the dynamic css custom properties
+// declarations below. The item called in the function is prefixed with
+// `var(--c-` to call the custom property for that color.
+// E.g. `color: clr(text);` will return `color: var(--c-text);`
+// Note: (The `--c-` is added via the `@each` loops below)
+@function clr($colorChoice) {
+  @return var(--c-#{$colorChoice});
+}
+
+// Create CSS custom properties
+// This is what powers the built-in OS light/dark mode switching.
+// For each color variable above (e.g. `text` and `background`) a css custom
+// property will be created. (e.g. `--c-text:` and `--c-background:`).
+//
+// The first `@each` below will create a custom property for each item in the
+// `$defaultColors` map. So put all of your default colors there.
+//
+// The `prefers-color-scheme: dark` media query below will then create custom
+// properties for each of the colors in the `$darkColors` map only if the
+// browser supports that feature. If there is an exact match (e.g. `text`) in
+// both maps, the one from `$darkColors` will be used on machines that have
+// opted to use the 'dark mode' on their OS.
+:root {
+  // Create custom properties for default colors
+  @each $name, $color in $defaultColors {
+    --c-#{$name}: #{$color};
+  }
+
+  // Create custom properties for dark colors, an duse them if the user's OS has dark mode enabled
+  @media (prefers-color-scheme: dark) {
+    @each $name, $color in $darkColors {
+      --c-#{$name}: #{$color};
+    }
+  }
+
+  // Use the default color scheme for the "Default Theme" section of the
+  // component library regardless of OS setting.
+  // This is required to show the correct colors in the component library at all times
+  [data-theme='default'] {
+    @each $name, $color in $defaultColors {
+      --c-#{$name}: #{$color};
+    }
+  }
+
+  // Use the dark color scheme for the "Dark Theme" section of the  component
+  // library regardless of OS setting.
+  // This is required to show the correct colors in the component library at all times
+  [data-theme='dark'] {
+    @each $name, $color in $darkColors {
+      --c-#{$name}: #{$color};
+    }
+  }
+}

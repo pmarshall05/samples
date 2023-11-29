@@ -1,0 +1,159 @@
+/* acme-regular - latin */
+
+@font-face {
+  font-weight: 400;
+  font-family: Acme;
+  font-style: normal;
+  font-display: optional;
+  src:
+    local('Acme'),
+    url('../fonts/acme-v18-latin-regular.woff2') format('woff2'),
+    url('../fonts/acme-v18-latin-regular.woff') format('woff');
+}
+
+/* source-sans-pro-regular - latin */
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-display: swap;
+  src:
+    local('Source Sans Pro'),
+    url('../fonts/source-sans-pro-v21-latin-regular.woff2') format('woff2'),
+    url('../fonts/source-sans-pro-v21-latin-regular.woff') format('woff');
+
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+// /* source-sans-pro-italic - latin */
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-display: swap;
+  src:
+    local('Source Sans Pro Italic'),
+    url('../fonts/source-sans-pro-v21-latin-italic.woff2') format('woff2'),
+    url('../fonts/source-sans-pro-v21-latin-italic.woff') format('woff');
+
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+// /* source-sans-pro-600 - latin */
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-display: swap;
+  src:
+    local('Source Sans Pro'),
+    url('../fonts/source-sans-pro-v21-latin-600.woff2') format('woff2'),
+    url('../fonts/source-sans-pro-v21-latin-600.woff') format('woff');
+
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+// /* source-sans-pro-700 - latin */
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-display: swap;
+  src:
+    local('Source Sans Pro'),
+    url('../fonts/source-sans-pro-v21-latin-700.woff2') format('woff2'),
+    url('../fonts/source-sans-pro-v21-latin-700.woff') format('woff');
+
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+// Public Sans Variable Font
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-display: swap;
+  src: url('../fonts/PublicSans-VariableFont_wght.ttf') format('ttf') tech('variations'),
+       url('../fonts/PublicSans-VariableFont_wght.ttf') format('ttf-variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-display: swap;
+  src: url('../fonts/PublicSans-Italic-VariableFont_wght.ttf') format('ttf') tech('variations'),
+       url('../fonts/PublicSans-Italic-VariableFont_wght.ttf') format('ttf-variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+// Open Sans Variable Font
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  src: url('../fonts/OpenSans-VariableFont_wdth,wght.ttf') format('ttf') tech('variations'),
+       url('../fonts/OpenSans-VariableFont_wdth,wght.ttf') format('ttf-variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-display: swap;
+  src: url('../fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('ttf') tech('variations'),
+       url('../fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('ttf-variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+// /* open-sans-600 - latin */
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  src:
+    local('Source Sans Pro'),
+    url('../fonts/open-sans-v34-latin-600.woff2') format('woff2'),
+    url('../fonts/open-sans-v34-latin-600.woff') format('woff');
+
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+// /* open-sans-700 - latin */
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  src:
+    local('Source Sans Pro'),
+    url('../fonts/open-sans-v34-latin-700.woff2') format('woff2'),
+    url('../fonts/open-sans-v34-latin-700.woff') format('woff');
+
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+// /* open-sans-800 - latin */
+
+@font-face {
+  font-weight: 800;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  src:
+    local('Source Sans Pro'),
+    url('../fonts/open-sans-v34-latin-800.woff2') format('woff2'),
+    url('../fonts/open-sans-v34-latin-800.woff') format('woff');
+
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}

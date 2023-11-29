@@ -1,0 +1,17 @@
+utility_menu_items:
+  - title: 'MyChart Login'
+    url: '#'
+  - title: 'Careers'
+    url: '#'
+  - title: 'Pay Your Bill'
+    url: '#'
+  - title: 'For Providers'
+    url: '#'
+  - title: 'Residencies'
+    url: '#'
+  - title: 'Giving'
+    url: '#'
+  - title: 'Contact Us'
+    url: '#'
+utility_search: false
+utility_location: false

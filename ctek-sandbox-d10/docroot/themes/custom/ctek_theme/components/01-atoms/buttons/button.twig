@@ -1,0 +1,35 @@
+{#
+/**
+ * Available variables:
+ * - button__content - the content of the button (typically text)
+ *
+ * Available blocks:
+ * - button__content - used to replace the content of the button with something other than text
+ *   for example: to insert an icon
+ */
+#}
+
+{% set button__base_class = button__base_class|default('button') %}
+{% set button__attributes = button__attributes|default([]) %}
+
+{% set button__attributes = button__attributes|merge({
+  'class': bem(button__base_class, button__modifiers, button__blockname, button__additional_classes),
+}) %}
+
+{% if (button_url is not empty) %}
+<a href="{{ button_url }}" target="_blank">
+{% endif %}
+<button {{ add_attributes(button__attributes) }}>
+  {% if (button_icon is not empty) and (button_icon_position == 'left') %}
+  <i class="fa-{{ button_icon_style }} fa-{{ button_icon }}"></i>
+  {% endif %}
+  {% block button__content %}
+    {{ button__content }}
+  {% endblock %}
+  {% if (button_icon is not empty) and (button_icon_position == 'right') %}
+  <i class="fa-{{ button_icon_style }} fa-{{ button_icon }}"></i>
+  {% endif %}
+</button>
+{%if (button_url is not empty) %}
+</a>
+{% endif %}

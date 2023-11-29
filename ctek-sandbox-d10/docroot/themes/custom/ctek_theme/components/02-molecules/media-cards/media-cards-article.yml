@@ -1,0 +1,47 @@
+media_cards_eyebrow: 'Optional Eyebrow Text'
+media_cards_title: 'Media Cards Title'
+media_cards_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+media_card_items:
+  - content_type: 'article'
+    title: 'Article 1'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'
+    article_type: 'blogs'
+    tags:
+      - title: 'Cancer'
+      - title: "Women's Health"
+  - content_type: 'article'
+    title: 'Article 2'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'
+    article_type: 'news'
+    tags:
+      - title: 'Fitness'
+      - title: 'Nutrition'
+  - content_type: 'article'
+    title: 'Article 3'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'
+    article_type: 'blogs'
+    tags:
+      - title: 'Pediatric Care'
+  - content_type: 'article'
+    title: 'Article 4'
+    url: '#'
+    image_src: 'https://picsum.photos/1280/720'
+    image_alt: "This is the image's alt text"
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio morbi quis commodo odio aenean sed. '
+    eyebrow: 'Eyebrow Text'
+    article_type: 'press release'
+    tags:
+      - title: 'Yoga'
+      - title: 'Fitness'

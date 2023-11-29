@@ -1,0 +1,5 @@
+featured_media_video_type: 'embed'
+featured_media_video_content: "<iframe title='Test Video' width='854' height='480' frameborder='0' allowfullscreen='allowfullscreen' src='https://www.youtube.com/embed/YRnVnlhjOBs?autoplay=0&amp;start=0'></iframe>"
+featured_media_title: 'What is Atrial Fibrillation?'
+featured_media_description: 'Introduction lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Sed quis dui eu massa placerat facilisis quis vel est.'
+featured_media_position: 'left'

@@ -1,0 +1,40 @@
+{% set tabs__base_class = tabs__base_class|default('tabs') %}
+{% set tabs__attributes = tabs__attributes|default([]) %}
+
+{% set tabs__attributes = tabs__attributes|merge({
+    'class': bem(tabs__base_class, tabs__modifiers, tabs__blockname, tabs__additional_classes),
+}) %}
+
+
+<section {{ add_attributes(tabs__attributes) }}>
+  <div {{ bem ('nav',[], tabs__base_class) }}>
+    {% for key, tab in tabs %}
+      {% if key == 0 %}
+        {% set is_active = true %}
+      {% else %}
+        {% set is_active = false %}
+      {% endif %}
+      {% include "@molecules/tabs/_tab.twig" with {
+          tab_link: "#tab-" ~ key,
+          tab_text: tab.label,
+          is_active: is_active,
+      } %}
+    {% endfor %}
+  </div>
+
+  <div {{ bem ('wrapper',[], tabs__base_class) }}>
+  {% for key, tab in tabs %}
+    {% if key == 0 %}
+        {% set is_active = true %}
+    {% else %}
+        {% set is_active = false %}
+    {% endif %}
+    <div {{ bem ('tab',[], tabs__base_class, [is_active ? 'is-active' : '']) }}>
+      <div id="tab-{{ key }}" {{ bem ('content',[], tabs__base_class) }}>
+        {{ tab.content|raw }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+</section>

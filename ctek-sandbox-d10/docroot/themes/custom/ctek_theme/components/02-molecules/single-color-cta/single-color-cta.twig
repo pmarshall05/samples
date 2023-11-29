@@ -1,0 +1,28 @@
+{% set single_color_cta__base_class = single_color_cta__base_class|default('single-color-cta') %}
+{% set single_color_cta__attributes = single_color_cta__attributes|default([]) %}
+
+{% set single_color_cta__attributes = single_color_cta__attributes|merge({
+    'class': bem(single_color_cta__base_class, single_color_cta__modifiers, single_color_cta__blockname, single_color_cta__additional_classes),
+  }) %}
+
+<section {{ add_attributes(single_color_cta__attributes) }}>
+	<div {{ bem ('inner',[], single_color_cta__base_class) }}>
+		<div {{ bem ('content',[], single_color_cta__base_class) }}>
+			{% include "@atoms/text/headings/_heading.twig" with {
+            	heading_level: 2,
+            	heading: single_color_cta_title,
+        	} %}
+
+			{% include "@atoms/text/text/01-paragraph.twig" with {
+                paragraph_content: single_color_cta_description,
+            } %}
+        </div>
+
+  		<div {{ bem ('button',[], single_color_cta__base_class) }}>
+  			{% include "@atoms/buttons/button.twig" with {
+	  			button__content: single_color_cta_button_label,
+	  			button__modifiers: [single_color_cta_button_type],
+	  		}%}
+ 		</div>
+	</div>
+</section>

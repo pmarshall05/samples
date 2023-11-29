@@ -1,0 +1,29 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function service_glossary_theme() {
+  return [
+    'service_glossary' => [
+      'variables' => [
+        'tabs' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme().
+ */
+
+function ctek_demo_service_theme() {
+  return [
+    'ctek_demo_service' => [
+      'variables' => [
+      ],
+    ]
+  ];
+}

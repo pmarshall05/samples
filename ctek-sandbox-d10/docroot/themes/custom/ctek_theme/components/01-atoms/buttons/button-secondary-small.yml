@@ -1,0 +1,5 @@
+button__content: 'Lorem Ipsum'
+button_url: '#'
+button__modifiers:
+  - 'secondary'
+  - 'small'

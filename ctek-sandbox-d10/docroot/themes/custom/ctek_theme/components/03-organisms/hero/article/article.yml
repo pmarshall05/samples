@@ -1,0 +1,5 @@
+article_image_src: 'https://picsum.photos/1280/720'
+article_image_alt: "This is the image's alt text"
+article_image_caption: 'Optional caption lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies a tortor quis.'
+article_title: 'Article Title'
+article_summary: 'Optional intro lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies a tortor quis tristique. Praesent varius nibh at leo iaculis, in tempus sem viverra.'

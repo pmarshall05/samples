@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+{% extends "@organisms/site/site-header/site-header.twig" %}
+
+{% block header__utility_nav %}
+  {{ elements.ctek_theme_utilitymenu }}
+{% endblock %}
+
+{% block header__logo %}
+  {{ elements.ctek_theme_sitebranding }}
+{% endblock %}
+
+{% block header__main_nav %}
+  {{ elements.ctek_theme_mainnavigation }}
+{% endblock %}
+
+{% block header_usertype_selector %}
+  {{ elements.ctek_theme_usertypeselector }}
+{% endblock %}
+
+{% block header_language_selector %}
+  {{ elements.ctek_theme_languageswitchercontent }}
+{% endblock %}

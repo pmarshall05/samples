@@ -1,0 +1,49 @@
+{% set text_cards__base_class = text_cards__base_class|default('text-cards') %}
+{% set text_cards__attributes = text_cards__attributes|default([]) %}
+
+{% set text_cards__attributes = text_cards__attributes|merge({
+    'class': bem(text_cards__base_class, text_cards__modifiers, text_cards__blockname, text_cards__additional_classes),
+  }) %}
+
+<section {{ add_attributes(text_cards__attributes) }}>
+	<div {{ bem ('content',[], text_cards__base_class) }}>
+	{% if text_cards_eyebrow %}
+		{% include "@atoms/text/text/09-eyebrow.twig" with {
+          eyebrow_content: text_cards_eyebrow,
+        } %}
+	{% endif %}
+  	{% if text_cards_title %}
+	  	{% include "@atoms/text/headings/_heading.twig" with {
+	          heading_level: 2,
+	          heading: text_cards_title,
+	    } %}
+	{% endif %}
+	{% if text_cards_description %}
+		{% include "@atoms/text/text/01-paragraph.twig" with {
+          paragraph_content: text_cards_description,
+          paragraph_modifiers: ['large'],
+        } %}
+	{% endif %}
+  </div>
+  <div {{ bem ('cards',[], text_cards__base_class) }}>
+  	{% for row in text_cards_items|batch(2) %}
+  		<div {{ bem ('row',[], text_cards__base_class) }}>
+  			{% for item in row %}
+  				<div {{ bem ('card',[], text_cards__base_class) }}>
+						{% if item.title %}
+					  	{% include "@atoms/text/headings/_heading.twig" with {
+					          heading_level: 4,
+					          heading: item.title,
+					    } %}
+					{% endif %}
+					{% if item.description %}
+						{% include "@atoms/text/text/01-paragraph.twig" with {
+				          paragraph_content: item.description,
+				        } %}
+					{% endif %}
+	  			</div>
+  			{% endfor %}
+  		</div>
+  	{% endfor %}
+  </div>
+</section>

@@ -1,0 +1,27 @@
+tags:
+  - content: 'Lorem Ipsum'
+    url: '#'
+    modifiers:
+      - 'outline'
+  - content: 'Lorem Ipsum'
+    url: '#'
+    modifiers:
+      - 'secondary'
+  - content: 'Lorem Ipsum'
+    url: '#'
+    modifiers:
+      - 'tertiary'
+  - content: 'Lorem Ipsum'
+    url: '#'
+    icon: 'dumbbell'
+    icon_style: 'solid'
+    icon_position: 'left'
+    modifiers:
+      - 'outline'
+  - content: 'Lorem Ipsum'
+    url: '#'
+    icon: 'person-walking'
+    icon_style: 'solid'
+    icon_position: 'right'
+    modifiers:
+      - 'secondary'

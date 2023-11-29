@@ -1,0 +1,4 @@
+name: CTEK Demo Service
+description: Custom module for Centretek Demo services site section.
+type: module
+core_version_requirement: ^10

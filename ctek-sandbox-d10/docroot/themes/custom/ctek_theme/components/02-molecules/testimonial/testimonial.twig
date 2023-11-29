@@ -1,0 +1,55 @@
+{% set testimonial__base_class = testimonial__base_class|default('testimonial') %}
+{% set testimonial__attributes = testimonial__attributes|default([]) %}
+
+{% set testimonial__attributes = testimonial__attributes|merge({
+    'class': bem(testimonial__base_class, testimonial__modifiers, testimonial__blockname, testimonial__additional_classes),
+  }) %}
+
+<section {{ add_attributes(testimonial__attributes) }}>
+    <div {{ bem ('quote',[], testimonial__base_class) }}>
+        {% include "@atoms/images/icons/_icon-fontawesome.twig" with {
+            icon__name: 'quote-left',
+            icon__style: 'solid',
+        } %}
+    </div>
+    <div {{ bem ('details',[], testimonial__base_class) }}>
+        <div {{ bem ('details',[], testimonial__base_class) }}>
+            <div {{ bem ('content',[], testimonial__base_class) }}>
+                {% include "@atoms/text/text/01-paragraph.twig" with {
+                    paragraph_content: testimonial_content,
+                } %}
+            
+                {% if testimonial_link_url and testimonial_link_title %}
+                    {% include "@atoms/links/link/link.twig" with {
+                        link_content: testimonial_link_title,
+                        link_url: testimonial_link_url,
+                    } %}
+                {% endif %}
+            </div>
+            <div {{ bem ('user',[], testimonial__base_class) }}>
+                {% if testimonial_image_src %}
+                    <div {{ bem ('image',[], testimonial__base_class) }}>
+                        {% include "@atoms/images/image/responsive-image.twig" with {
+                            output_image_tag: true,
+                            image_src: testimonial_image_src,
+                            image_alt: testimonial_image_alt,
+                        } %}
+                    </div>
+                {% endif %}
+                <div {{ bem ('user-details',[], testimonial__base_class) }}>
+                    {% include "@atoms/text/headings/_heading.twig" with {
+                        heading_level: 5,
+                        heading: testimonial_person,
+                    } %}
+                    {% if testimonial_person_title %}
+                        {% include "@atoms/text/text/01-paragraph.twig" with {
+                            paragraph_content: testimonial_person_title,
+                            paragraph_modifiers: ['small'],
+                        } %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>

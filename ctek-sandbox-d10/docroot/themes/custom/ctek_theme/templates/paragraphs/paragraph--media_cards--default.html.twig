@@ -1,0 +1,93 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set label_hidden = true %}
+{%
+  set card__additional_classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+  	
+{% if (content.field_featured_content) %}
+  {% set list_items = [] %}
+  
+  {% for item in content.field_featured_content['#items'] %}
+    {% set content_type = item.entity.type.value[0].target_id %}
+    {% set image_src = '' %}
+    {% set image_alt = '' %}
+
+
+    {% if content_type == 'article' %} 
+      {% set image_src = file_url(item.entity.field_article_hero[0].entity.field_image.entity.uri.value) %}
+      {% set image_alt = item.entity.field_article_hero[0].entity.field_image.entity.alt %}
+      {% set body = item.entity.field_article_hero[0].entity.field_description[0].value %}
+    {% elseif content_type == 'service' or content_type == 'program' or content_type == 'condition' or content_type == 'treatment' %}
+      {% set image_src = file_url(item.entity.field_service_hero[0].entity.field_image.entity.uri.value) %}
+      {% set image_alt = item.entity.field_service_hero[0].entity.field_image.entity.alt %}
+      {% set body = item.entity.field_service_hero[0].entity.field_description[0].value %}  
+    {% endif %}
+
+    {% if content.field_show_item_description['#items'][0].value == 0 %}
+      {% set body = null %}
+    {% endif %}
+   
+    {% set list_items = list_items|merge([{
+      'title': item.entity.title.value,
+      'url': path('entity.node.canonical', {'node': item.entity.id}),
+      'image_src': image_src,
+      'image_alt': image_alt,
+      'content_type':content_type,
+      'body': body,
+      }]) 
+    %}
+  {% endfor %}
+{% endif %}
+
+{% block media_cards %}
+  {% include "@molecules/media-cards/media-cards.twig" with {
+    media_cards_eyebrow: content.field_eyebrow['#items'][0].value,
+    media_cards_title: content.field_title['#items'][0].value,
+    media_cards_description: content.field_description['#items'][0].value,
+    media_card_items: list_items,
+  } %}
+{% endblock media_cards %}

@@ -1,0 +1,66 @@
+/*
+ * General Layout
+*/
+
+@use '../00-base/00-defaults/01-variables' as *;
+@use '../00-base/00-defaults/02-breakpoints' as *;
+@use '../00-base/00-defaults/03-mixins' as *;
+
+$sidebar-width: 33%;
+$gutter: $space;
+$main-width: calc(100% - (#{$sidebar-width} + #{$gutter}));
+
+/*
+ * Layout Using Flexbox (IE11+).
+ * Remove this and uncomment Grid code below to use CSS Grid.
+*/
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include large;
+}
+
+main {
+  display: flex;
+  gap: $space;
+}
+
+.breadcrumb, .text-long, .icon-list, .related-links, .related-media, .testimonial, .text-cards, .services-search, .button-grid, .services-results-header, .single-color-cta, .media-cards {
+  @include wrapper;
+  margin-top: 80px;
+}
+
+.tags {
+  @include wrapper;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.quick-links, .next-steps, .featured-facts {
+  margin-top: 80px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &--with-sidebar {
+    width: 70%;
+  }
+}
+
+.main-content > * {
+  flex-grow: 1;
+}
+
+.main-sidebar {
+  width: 30%;
+}
+
+#views-exposed-form-content-index-services {
+  display: none;
+}

@@ -1,0 +1,125 @@
+/* Create a mixin for paragraph styles that can be implemented
+* in components with other classnames.
+*/
+
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+
+@mixin paragraph($margin: 0 0 1em) {
+  margin: $margin;
+  font-size: 1.125rem; 
+  line-height: 1.8; 
+  font-weight: 400;
+  font-variation-settings: 'wght' 400;
+}
+
+body {
+  font-family: $font-body;
+}
+
+.paragraph {
+  @include paragraph;
+
+  &--small {
+    font-size: 1rem; 
+  }
+
+  &--large {
+    font-size: 1.375rem; 
+  }
+}
+
+.blockquote {
+  font-style: italic;
+  border-left: solid 3px clr(accent);
+  margin-left: 1em;
+  padding-left: 1em;
+}
+
+.hr {
+  width: 100%;
+  border: 1px solid clr(extended-accent-1);
+}
+
+/* TODO: BEM selectors should be applied to wysiwyg-created content */
+
+.text-long {
+  p {
+    @extend .paragraph;
+  }
+
+  blockquote {
+    @extend .blockquote;
+  }
+
+  hr {
+    @extend .hr;
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 16px;
+    width: 350px;
+    align-items: center;
+
+    figcaption {
+      text-align: center;
+      color: clr(neutral-gray-2);
+    }
+  }
+}
+
+pre {
+  margin: 0;
+  background-color: var(--c-background-section);
+}
+
+.eyebrow {
+  font-family: $font-body;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 180%; /* 32.4px */
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+
+  @include small {
+    font-size: 0.875rem;
+  }
+
+  @include medium {
+    font-size: 1rem;
+  }
+
+  @include large {
+    font-size: 1.125rem;
+  }
+
+  @include xl {
+    font-size: 1.125rem;
+  }
+}
+
+.subhead {
+  font-family: $font-body;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  font-weight: regular;
+
+  @include small {
+    font-size: 1.25rem;
+  }
+
+  @include medium {
+    font-size: 1.375rem;
+  }
+
+  @include xl {
+    font-size: 1.5rem;
+  }
+}

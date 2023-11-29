@@ -1,0 +1,6 @@
+single_color_cta_title: 'Lorem Ipsum'
+single_color_cta_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.'
+single_color_cta_button_label: 'Button Label'
+single_color_cta_button_type: 'secondary'
+single_color_cta__modifiers: 
+  - 'primary'

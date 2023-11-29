@@ -1,0 +1,33 @@
+{% if content.field_button['#items'][0].entity %}
+	{% set style = 'solid' %}
+	{% if (content.field_button['#items'][0].entity.field_icon[0].style == 'far') %}
+		{% set style = 'regular' %}
+	{% endif %}
+
+	{% set button = {
+		'label': content.field_button['#items'][0].entity.field_label[0].value,
+		'type': content.field_button['#items'][0].entity.field_button_type[0].value,
+		'icon': content.field_button['#items'][0].entity.field_icon[0].icon_name,
+		'icon_position': content.field_button['#items'][0].entity.field_icon_position[0].value,
+		'icon_style': style,
+	} %}
+{% endif %}
+
+{% if content.field_search_form_action['#items'][0].url.external %}
+	{% set formAction = content.field_search_form_action['#items'][0].uri %}
+{% else %}
+	{% set formAction = content.field_search_form_action['#items'][0].uri|replace({'internal:':''}) %}
+{% endif %}
+
+{% block services_search %}
+	{% include "@molecules/search/service/services-search.twig" with {
+		services_search_title: content.field_title['#items'][0].value,
+		services_search_description: content.field_description['#items'][0].value,
+		services_search_input_placeholder: content.field_input_placeholder_text['#items'][0].value,
+		services_search_input_icon: content.field_icon['#items'][0].icon_name,
+		services_search_input_name: 'keyword',
+		services_search_button: button,
+		services_search_action: formAction,
+		services_search_form_background: content.field_search_form_background['#items'][0].value,
+  } %}
+{% endblock services_search %}

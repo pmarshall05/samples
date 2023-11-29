@@ -1,0 +1,8 @@
+ctek_demo_service.index:
+  title: "Services"
+  route_name: "ctek_demo_service.index"
+  base_route: "ctek_demo_service.index"
+ctek_demo_service.index_edit:
+  title: "Sercvices Edit"
+  route_name: "config_pages.index"
+  base_route: "ctek_demo_service.index"

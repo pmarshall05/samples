@@ -1,0 +1,83 @@
+// Sass map to define colors. Each set should have a "Dark" variation when required.
+// e.g. `default` and `default-dark`. Or `purple` and `purple-dark`.
+
+@use '../../../00-base/00-defaults/01-variables' as *;
+@use '../../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../../00-base/00-defaults/03-mixins' as *;
+@use '../../../00-base/01-colors/colors-used' as *;
+
+.hero-article {
+
+  &__bg {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 56px 144px;
+    background-color: clr(accent);
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: clr(text-inverse);
+  }
+
+  &__heading-title .heading {
+    text-align: center;
+    color: clr(text-inverse);
+  }
+
+  &__heading-summary .subhead {
+    text-align: center;
+    color: clr(text-inverse);
+    font-weight: 325;
+    font-variation-settings: 'wght' 325;
+  }
+
+  &__image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: -400px;
+  }
+
+  &__image-inner {
+    width: 75%;
+  
+
+    figure {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      img {
+       width: 100%;
+       height: 540px;
+       object-fit: cover;
+      }
+    }
+
+    img {
+       width: 100%;
+       height: 540px;
+       object-fit: cover;
+    }
+
+    figcaption {
+      margin-top: 30px;
+      font-style: normal;
+      text-align: center;
+      color: clr(neutral-gray-2);
+      font-size: 1rem;
+    }
+  }
+} 
+
+.hero-article--has-image {
+  .hero-article__bg {
+    padding-bottom: 440px;
+  }
+}

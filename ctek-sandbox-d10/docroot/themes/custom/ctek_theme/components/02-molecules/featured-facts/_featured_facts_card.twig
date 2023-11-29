@@ -1,0 +1,22 @@
+{% set link_modifiers = [] %}
+
+{% if item.background == 'primary' or item.background == 'accent' %}
+	{% set link_modifiers = ['inverse'] %}
+{% endif %}
+
+<div {{ bem ('card', [item.background], featured_facts__base_class) }}>
+	<div {{ bem ('card-icon',[item.icon_color], featured_facts__base_class) }}>
+		<i class="fa-{{ item.icon_style }} fa-{{ item.icon }}"></i>
+	</div>
+	<div {{ bem ('card-statistic',[], featured_facts__base_class) }}>
+		{% include "@atoms/text/text/01-paragraph.twig" with {
+	 		paragraph_content: item.fact,
+		} %}
+	</div>
+	<div {{ bem ('card-link',[], featured_facts__base_class) }}>
+		{% include "@atoms/links/link/link.twig" with {
+	 		link_url: item.link.url,
+	        link_content: item.link.title,
+		} %}
+	</div>
+</div>

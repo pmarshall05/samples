@@ -1,0 +1,29 @@
+{% set hero_service__base_class = hero_service__base_class|default('hero-service') %}
+{% set hero_service__attributes = hero_service__attributes|default([]) %}
+
+{% set hero_service__attributes = hero_service__attributes|merge({
+    'class': bem(hero_service__base_class, hero_service__modifiers, hero_service__blockname, hero_service__additional_classes),
+  }) %}
+
+<section {{ add_attributes(hero_service__attributes) }}>
+  <div {{ bem ('content',[], hero_service__base_class) }}>
+  	{% if service_title %}
+	  	{% include "@atoms/text/headings/_heading.twig" with {
+	          heading_level: 1,
+	          heading: service_title,
+	    } %}
+	{% endif %}
+	{% if service_subhead %}
+		{% include "@atoms/text/text/08-subhead.twig" with {
+          subhead_content: service_subhead,
+        } %}
+	{% endif %}
+  </div>
+  <div {{ bem ('image',[], hero_service__base_class) }}>
+  	{% include "@atoms/images/image/responsive-image.twig" with {
+      output_image_tag: true,
+      image_src: service_image_src,
+      image_alt: service_image_alt,
+	} %}
+  </div>
+</section>

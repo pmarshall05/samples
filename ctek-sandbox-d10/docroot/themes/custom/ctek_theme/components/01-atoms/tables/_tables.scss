@@ -1,0 +1,105 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+
+$table-border-width: 1px;
+
+@mixin table-header-footer {
+  background-color: clr(accent);
+
+  > * {
+    border-color: clr(primary);
+  }
+}
+
+@mixin table-cell {
+  border: 0;
+  border-right-width: $table-border-width;
+  border-bottom-width: $table-border-width;
+  border-style: solid;
+  border-color: inherit;
+  padding: $space;
+
+  &:last-child {
+    border-right: 0;
+  }
+
+  :last-child > & {
+    border-bottom: 0;
+  }
+
+  &[data-cell-highlight] {
+    background-color: clr(accent);
+  }
+}
+
+.table {
+  border: $table-border-width solid clr(primary);
+  border-spacing: 0;
+  margin: $space 0;
+  width: 100%;
+}
+
+// Table header elements
+.table__header {
+  @include table-header-footer;
+}
+
+.table__header_cell {
+  @include table-cell;
+}
+
+// Table body rows
+.table__row {
+  // Alternate row background/border colors
+  &:nth-child(odd) {
+    background-color: clr(neutral-white);
+    border-color: clr(accent);
+  }
+
+  &:nth-child(even) {
+    background-color: clr(slate);
+    border-color: clr(accent);
+  }
+}
+
+// Table body cells
+.table__cell {
+  @include table-cell;
+}
+
+// Table footer elements
+.table__footer {
+  @include table-header-footer;
+}
+
+.table__footer_cell {
+  @include table-cell;
+}
+
+caption {
+  caption-side: bottom;
+}
+
+// WYSIWYG specific styles
+.text-field {
+  table {
+    @extend .table;
+  }
+
+  th {
+    @extend .table__header_cell;
+  }
+
+  td {
+    @extend .table__cell;
+  }
+
+  tr {
+    @extend .table__row;
+  }
+
+  tfoot th {
+    @extend .table__footer_cell;
+  }
+}

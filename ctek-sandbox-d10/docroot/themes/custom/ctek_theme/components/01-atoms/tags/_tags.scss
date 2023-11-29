@@ -1,0 +1,61 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+.tag {
+	display: inline-flex;
+	padding: 12px 24px;
+	align-items: center;
+	gap: 10px;
+	border-radius: 32px;
+	background: clr(primary);
+	background: clr(primary);
+	color: clr(text-inverse);
+	font-weight: 700;
+	font-variation-settings: 'wght' 700;
+
+	a, a:hover {
+		text-decoration: none;
+		color: clr(text-inverse);
+		font-weight: 700;
+		font-variation-settings: 'wght' 700;
+	}
+
+	&--primary {
+		background: clr(primary);
+		color: clr(text-inverse);
+
+		a, a:hover {
+			color: clr(text-inverse);
+		}
+	}
+
+	&--secondary {
+		background: clr(secondary);
+		color: clr(text);
+
+		a, a:hover {
+			color: clr(text);
+		}
+	}
+
+	&--tertiary {
+		background: clr(accent);
+		color: clr(text-inverse);
+
+		a, a:hover {
+			color: clr(text-inverse);
+		}
+	}
+
+	&--outline {
+		background: clr(neitrl-white);
+		border: 1px solid clr(primary);
+		color: clr(primary);
+
+		a, a:hover {
+			color: clr(primary);
+		}
+	}
+}

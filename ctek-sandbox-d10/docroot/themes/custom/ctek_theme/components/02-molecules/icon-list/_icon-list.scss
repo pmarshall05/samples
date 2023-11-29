@@ -1,0 +1,94 @@
+@use '../../00-base/00-defaults/01-variables' as *;
+@use '../../00-base/00-defaults/02-breakpoints' as *;
+@use '../../00-base/00-defaults/03-mixins' as *;
+@use '../../00-base/01-colors/colors-used' as *;
+
+
+.icon-list {
+  	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 32px;
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+
+		.heading , .eyebrow {
+			color: clr(primary);
+			margin: 0;
+		}
+	}
+
+	&__items {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 32px;
+		align-self: stretch;
+	}
+
+	&__item {
+		display: flex;
+		align-items: flex-start;
+		gap: 24px;
+		align-self: stretch;
+	}
+
+
+	&__item-icon {
+		width: 60px;
+		
+		i {
+			font-size: 48px;
+			color: clr(accent);
+		}
+
+		&--primary {
+			i {
+				color: clr(primary);
+			}
+		}
+
+		&--secondary {
+			i {
+				color: clr(secondary);
+			}
+		}
+
+		&--accent {
+			i {
+				color: clr(accent);
+			}
+		}
+
+		&--error {
+			i {
+				color: clr(error);
+			}
+		}
+
+		&--success {
+			i {
+				color: clr(success);
+			}
+		}
+
+		&--star-rating {
+			i {
+				color: clr(star-rating);
+			}
+		}
+	}
+
+	&__item-content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+		flex: 1 0 0;
+	}
+	
+}

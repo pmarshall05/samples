@@ -1,0 +1,32 @@
+{% if (content.field_related_links['#items'][0].entity.field_links) %}
+	{% set list_items = [] %}
+	{% set itemUrl = '' %}
+
+	{% for item in content.field_related_links['#items'][0].entity.field_links %}
+		
+		{% if (loop.index <= 3) %}
+			{% if item.entity.field_url[0].url.external %}
+				{% set itemUrl = item.entity.field_url[0].uri %}
+			{% else %}
+				{% set itemUrl = item.entity.field_url[0].uri|replace({'internal:':''}) %}
+			{% endif %}
+			
+			{% set list_items = list_items|merge([{
+				'name': item.title,
+	    		'url': itemUrl,
+				}]) 
+			%}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% embed "@pages/content-types/service/service-search-result.twig" with {
+  service_search_result__additional_classes: '',
+  service_search_result_heading: label,
+  service_search_result_link_url: url,
+  service_search_result_summary: content.field_search_summary['#items'][0].value,
+  service_search_result_image_src: file_url(content.field_service_hero[0]['#paragraph'].field_image.entity.uri.value),
+  service_search_result_image_alt: content.field_service_hero[0]['#paragraph'].field_image.entity.alt,
+  service_search_result_related_items: list_items,
+} %}
+{% endembed %}

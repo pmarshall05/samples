@@ -1,0 +1,17 @@
+icons:
+  - icon_name: twitter
+    icon_style: brands
+  - icon_name: square-x-twitter
+    icon_style: brands
+  - icon_name: facebook
+    icon_style: brands
+  - icon_name: laptop
+    icon_style: solid
+  - icon_name: arrow-right
+    icon_style: solid
+  - icon_name: arrow-left
+    icon_style: solid
+  - icon_name: arrow-up
+    icon_style: solid
+  - icon_name: arrow-down
+    icon_style: solid
