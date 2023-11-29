@@ -1,0 +1,29 @@
+ANDROID_AUTOMATION_NAME = "UIAutomator2"
+ANDROID_APP = "/qa-automation/robot-scripts/Common/Resources/ApiDemos-debug.apk"
+ANDROID_PLATFORM_NAME = "Android"
+ANDROID_PLATFORM_VERSION = "current_major"
+ANDROID_APP_PACKAGE = "io.appium.android.apis"
+ANDROID_DEVICE_NAME = "Android GoogleAPI Emulator"
+ANDROID_BROWSER_NAME = "Chrome"
+ANDROID_DESIRED_CAPS = {}
+ANDROID_DESIRED_CAPS['platformName'] = 'Android'
+ANDROID_DESIRED_CAPS['browserName'] = 'chrome'
+ANDROID_DESIRED_CAPS['version'] = 'latest'
+ANDROID_DESIRED_CAPS['appium:deviceName'] = 'Android GoogleAPI Emulator'
+ANDROID_DESIRED_CAPS['appium:platformVersion'] = 'current_major'
+ANDROID_DESIRED_CAPS['appium:automationName'] = 'UiAutomator2'
+
+
+ios_desired_capabilities = "platform:macOS 12,browserName:chrome,version:latest"
+IOS_AUTOMATION_NAME = "XCUITest"
+IOS_APP = "/qa-automation/robot-scripts/Common/Resources/TestApp.app.zip"
+IOS_PLATFORM_NAME = "iOS"
+IOS_PLATFORM_VERSION = "current_major"
+IOS_DEVICE_NAME = "iPhone Simulator"
+IOS_BROWSER_NAME = "Safari"
+IOS_DESIRED_CAPS = {}
+IOS_DESIRED_CAPS['platformName'] = 'iOS'
+IOS_DESIRED_CAPS['browserName'] = 'Safari'
+IOS_DESIRED_CAPS['appium:deviceName'] = 'iPhone Simulator'
+IOS_DESIRED_CAPS['appium:platformVersion'] = 'current_major'
+IOS_DESIRED_CAPS['appium:automationName'] = 'XCUITest'

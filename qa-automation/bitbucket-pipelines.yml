@@ -1,0 +1,65 @@
+image: python:3
+
+definitions:
+  services:
+    docker:
+      memory: 2048
+
+pipelines:
+  custom:
+    automated_tests:
+      - variables:
+          - name: CLIENT_NAME
+            default: CityMD
+            allowed-values:
+              - CityMD
+              - Cape Fear
+          - name: DEPLOYMENT_ENVIRONMENT
+            default: stage
+            allowed-values:
+              - dev
+              - qa
+              - stage
+              - production
+          - name: BROWSER
+            default: chrome
+            allowed-values:
+              - chrome
+              - firefox
+              - safari
+              - all
+          - name: SAUCE_USERNAME
+          - name: SAUCE_ACCESS_KEY
+      - step: 
+          name: Execute test suite for client
+          artifacts:
+            paths:
+              - results/CityMD/output.xml
+              - results/CityMD/log.html
+              - results/CityMD/report.html
+          script:
+            # Install Python Libraries
+            - pip install robotframework==5.0.1
+            - pip install robotframework-requests==0.9.3
+            - pip install robotframework-saucelabs==0.2.1
+            - pip install robotframework-selenium2library==3.0.0
+            - pip install robotframework-seleniumlibrary==6.0.0
+            - pip install robotframework-faker==5.0.0
+            - pip install robotframework-axelibrary==0.1.5
+            - pip install robotframework-appiumlibrary==2.0.0
+            - pip install robotframework-browser==17.5.2
+            - pip install saucebindings==1.3.0
+            - pip install simplejson==3.18.0
+            - pip install sa11y==0.2.3
+            - pip install selenium==4.9.1  
+
+            # Run Tests
+            - |
+              if [ $BROWSER = "all" ]; then
+                robot -v environment:$DEPLOYMENT_ENVIRONMENT -v SAUCE_USERNAME:$SAUCE_USERNAME -v SAUCE_ACCESS_KEY:$SAUCE_ACCESS_KEY -v browser:chrome -v local:False --outputdir results/$CLIENT_NAME/chrome robot-scripts/$CLIENT_NAME
+                robot -v environment:$DEPLOYMENT_ENVIRONMENT -v SAUCE_USERNAME:$SAUCE_USERNAME -v SAUCE_ACCESS_KEY:$SAUCE_ACCESS_KEY -v browser:firefox -v local:False --outputdir results/$CLIENT_NAME/firefox robot-scripts/$CLIENT_NAME 
+                robot -v environment:$DEPLOYMENT_ENVIRONMENT -v SAUCE_USERNAME:$SAUCE_USERNAME -v SAUCE_ACCESS_KEY:$SAUCE_ACCESS_KEY -v browser:safari -v local:False --outputdir results/$CLIENT_NAME/safari robot-scripts/$CLIENT_NAME 
+              else
+                robot -v environment:$DEPLOYMENT_ENVIRONMENT -v SAUCE_USERNAME:$SAUCE_USERNAME -v SAUCE_ACCESS_KEY:$SAUCE_ACCESS_KEY -v browser:$BROWSER -v local:False --outputdir results/$CLIENT_NAME robot-scripts/$CLIENT_NAME 
+              fi
+            
